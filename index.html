@@ -168,39 +168,49 @@
 .bg-danger .tooltip-email { color: #fff; }
 
 }
-.dropdown-toggle-wrapper {
+.tooltip-wrapper {
   position: relative;
-  margin-bottom: 15px;
-}
-
-.dropdown-toggle-btn {
   display: inline-block;
-  cursor: pointer;
-  color: #555;
-  font-size: 0.95rem;
-  padding: 5px 12px;
-  border: 1px solid #ccc;
-  border-radius: 25px;
-  background-color: #f9f9f9;
-  transition: background 0.3s ease;
-  margin-top: 5px;
+  color: #888;
+  text-decoration: underline;
 }
 
-.dropdown-toggle-btn:hover {
-  background-color: #e0f7fa;
+.tooltip-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 10;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
 }
 
-.dropdown-content {
-  display: none;
-  margin-top: 10px;
-  animation: fadeIn 0.4s ease;
+.tooltip-wrapper:hover .tooltip-bubble {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(5px);
 }
 
-@keyframes fadeIn {
-  from {opacity: 0; transform: translateY(-5px);}
-  to {opacity: 1; transform: translateY(0);}
+.tooltip-email {
+  font-weight: bold;
+  font-family: monospace;
+  background-color: rgba(0,0,0,0.2);
+  padding: 4px 8px;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
 }
 
+.bg-success .tooltip-email,
+.bg-info .tooltip-email { color: #fff; }
 
   </style>
 </head>
@@ -299,33 +309,37 @@
     </p>
 
 
-    <!-- LinkedIn -->
-<div class="contact-item dropdown-toggle-wrapper">
-  <i class="fab fa-linkedin google-green"></i>
-  <strong>LinkedIn:</strong>
-  <div class="dropdown-toggle-btn" onclick="toggleDropdown('linkedinDropdown')">
-    <i class="fas fa-chevron-down"></i> Ver mi perfil
-  </div>
-  <div class="dropdown-content" id="linkedinDropdown">
-    <a href="https://mx.linkedin.com/in/fatima-ruiz/en" target="_blank" class="btn btn-outline-primary btn-sm mt-2">
-      <i class="fab fa-linkedin"></i> Ir a LinkedIn
-    </a>
-  </div>
-</div>
+    <!-- LinkedIn estilo igual a los correos -->
+    <p class="contact-item">
+      <i class="fab fa-linkedin google-green"></i>
+      <strong>LinkedIn:</strong><br>
+      <span class="tooltip-wrapper email-hidden">
+        Mostrar enlace
+        <span class="tooltip-bubble bg-success text-white">
+          🌐 Perfil profesional
+          <a href="https://mx.linkedin.com/in/fatima-ruiz/en" target="_blank" class="tooltip-email">
+            Ir a LinkedIn
+          </a>
+        </span>
+      </span>
+    </p>
 
-<!-- Facebook -->
-<div class="contact-item dropdown-toggle-wrapper">
-  <i class="fab fa-facebook google-red"></i>
-  <strong>Facebook:</strong>
-  <div class="dropdown-toggle-btn" onclick="toggleDropdown('facebookDropdown')">
-    <i class="fas fa-chevron-down"></i> Ver mi perfil
-  </div>
-  <div class="dropdown-content" id="facebookDropdown">
-    <a href="https://fb.com/fatichikis" target="_blank" class="btn btn-outline-danger btn-sm mt-2">
-      <i class="fab fa-facebook"></i> Ir a Facebook
-    </a>
-  </div>
-</div>
+    <!-- Facebook estilo igual a los correos -->
+    <p class="contact-item">
+      <i class="fab fa-facebook google-red"></i>
+      <strong>Facebook:</strong><br>
+      <span class="tooltip-wrapper email-hidden">
+        Mostrar enlace
+        <span class="tooltip-bubble bg-info text-white">
+          📘 Perfil social
+          <a href="https://fb.com/fatichikis" target="_blank" class="tooltip-email">
+            Ir a Facebook
+          </a>
+        </span>
+      </span>
+    </p>
+
+
 
     <p class="mt-4 text-muted"><i class="fas fa-lock"></i> Por motivos de seguridad, no comparto mi número de celular.</p>
 
