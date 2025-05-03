@@ -94,6 +94,35 @@
       from {opacity: 0;}
       to {opacity: 1;}
     }
+    .btn-cv-google {
+  display: inline-block;
+  background: linear-gradient(135deg, #4285F4, #34A853);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn-cv-google i {
+  margin-right: 10px;
+  animation: pulseIcon 1.5s infinite;
+}
+
+.btn-cv-google:hover {
+  background: linear-gradient(135deg, #34A853, #4285F4);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  text-decoration: none;
+}
+
+@keyframes pulseIcon {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.2); opacity: 0.8; }
+}
   </style>
 </head>
 <body>
@@ -101,10 +130,48 @@
     <i class="fas fa-id-badge"></i>
     <h1 class="fw-bold">Bienvenido a mi página de contacto</h1>
     <p>¡Gracias por visitarme! Aquí puedes encontrar cómo comunicarte conmigo. 👇</p>
-    <a href="CV_FatimaRuiz.pdf" class="btn btn-light btn-sm mt-3" download>
-      <i class="fas fa-file-download"></i> Descargar mi CV
-    </a>
+    <a href="#" class="btn-cv-google" data-bs-toggle="modal" data-bs-target="#cvModal">
+    <i class="fas fa-lightbulb"></i> Descubre cómo estructuré mi CV para Google
+  </a>
   </div>
+  <!-- Modal -->
+  <div class="modal fade" id="cvModal" tabindex="-1" aria-labelledby="cvModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title" id="cvModalLabel">
+            <i class="fas fa-check-circle me-2"></i> ¡Aquí está mi CV real!
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
+        <div class="modal-body text-center">
+          <p class="mb-4">
+            Este es el CV que envié cuando fui aceptada en <strong>Google</strong>.
+            Tal vez no sea perfecto, ni tampoco tenga mucha experiencia, pero la estructura puede servirte como propósito para tus futuras solicitudes laborales.
+            <br><strong>¡Espero que te inspire a crear el tuyo! 🚀</strong>
+          </p>
+
+          <!-- Botón para mostrar la vista previa del CV -->
+          <button class="btn btn-outline-success mb-3" onclick="document.getElementById('cvViewer').style.display='block'; this.style.display='none';">
+            <i class="fas fa-file-alt me-1"></i> Ver CV
+          </button>
+
+          <!-- Visor oculto que aparece al presionar el botón -->
+          <div id="cvViewer" style="display: none;">
+            <div style="position: relative; padding-bottom: 65%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 0 15px rgba(0,0,0,0.1); max-width: 100%;">
+              <iframe
+                src="https://drive.google.com/file/d/1iak6HhUbLnYGLjElmBlalr3xrJj0f-g8/preview"
+                width="100%" height="100%" frameborder="0"
+                allowfullscreen
+                style="position: absolute; top:0; left: 0; width: 100%; height: 100%;">
+              </iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
   <div class="card-custom">
     <div class="thank-you-box">
