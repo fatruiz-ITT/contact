@@ -232,20 +232,29 @@
     align-items: flex-start;
     white-space: normal;
     padding: 12px;
-    max-width: 95vw;
-    left: auto;
-    right: 0;
+    max-width: 90vw;
+    left: 0;
     top: 40px;
+    position: fixed;
+    z-index: 9999;
+    background-color: #fff;
+    color: #000;
   }
   .tooltip-email {
     width: 100%;
     text-align: left;
-    margin-top: 5px;
+    margin-top: 8px;
+    word-break: break-all;
   }
   .contact-item {
     font-size: 1rem;
   }
-}
+  .email-hidden:hover .tooltip-bubble {
+    position: static;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
   </style>
 </head>
 <body>
