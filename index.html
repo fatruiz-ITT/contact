@@ -123,6 +123,85 @@
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.2); opacity: 0.8; }
 }
+.tooltip-wrapper {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  color: #888;
+  text-decoration: underline;
+}
+
+.tooltip-bubble {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  z-index: 10;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.tooltip-wrapper:hover .tooltip-bubble {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(5px);
+}
+
+.tooltip-email {
+  font-weight: bold;
+  color: #fff;
+  background-color: rgba(0,0,0,0.2);
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-family: monospace;
+}
+.bg-warning .tooltip-email { color: #000; background-color: rgba(255,255,255,0.6); }
+.bg-primary .tooltip-email { color: #fff; }
+.bg-danger .tooltip-email { color: #fff; }
+
+}
+.dropdown-toggle-wrapper {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.dropdown-toggle-btn {
+  display: inline-block;
+  cursor: pointer;
+  color: #555;
+  font-size: 0.95rem;
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 25px;
+  background-color: #f9f9f9;
+  transition: background 0.3s ease;
+  margin-top: 5px;
+}
+
+.dropdown-toggle-btn:hover {
+  background-color: #e0f7fa;
+}
+
+.dropdown-content {
+  display: none;
+  margin-top: 10px;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(-5px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+
   </style>
 </head>
 <body>
@@ -182,20 +261,72 @@
     </div>
 
     <h3 class="google-green mb-4"><i class="fas fa-paper-plane"></i> Datos de contacto</h3>
-    <p class="contact-item"><i class="fas fa-graduation-cap google-yellow"></i> <strong>Correo institucional:</strong><br>
-      <span class="email-hidden">Mostrar correo <span class="actual-email">l14212341@tectijuana.edu.mx</span></span></p>
-    <p class="contact-item"><i class="fas fa-user google-blue"></i> <strong>Correo personal:</strong><br>
-      <span class="email-hidden">Mostrar correo <span class="actual-email">fatimadejesusruiz@gmail.com</span></span></p>
-    <p class="contact-item"><i class="fas fa-briefcase warning-icon"></i> <strong>Correo laboral:</strong><br>
-      <span class="email-hidden">Mostrar correo <span class="actual-email">fatimaruiz@google.com</span></span>
-      <span class="text-danger d-block mt-1">
-        <i class="fas fa-exclamation-triangle"></i> Solo para temas relacionados con Google
+    <!-- Correos con etiquetas explicativas al pasar el mouse -->
+    <p class="contact-item">
+      <i class="fas fa-graduation-cap google-yellow"></i>
+      <strong>Correo institucional:</strong><br>
+      <span class="tooltip-wrapper email-hidden">
+        Mostrar correo
+        <span class="tooltip-bubble bg-warning text-dark">
+          📩 Para conferencias, reuniones escolares
+          <span class="tooltip-email">l14212341@tectijuana.edu.mx</span>
+        </span>
       </span>
     </p>
-    <p class="contact-item"><i class="fab fa-linkedin google-green"></i> <strong>LinkedIn:</strong><br>
-      <a href="https://mx.linkedin.com/in/fatima-ruiz/en" target="_blank">fatima-ruiz/en</a></p>
-    <p class="contact-item"><i class="fab fa-facebook google-red"></i> <strong>Facebook:</strong><br>
-      <a href="https://fb.com/fatichikis" target="_blank">fb.com/fatichikis</a></p>
+
+    <p class="contact-item">
+      <i class="fas fa-user google-blue"></i>
+      <strong>Correo personal:</strong><br>
+      <span class="tooltip-wrapper email-hidden">
+        Mostrar correo
+        <span class="tooltip-bubble bg-primary text-white">
+          💌 Para temas personales, laborales generales
+          <span class="tooltip-email">fatimadejesusruiz@gmail.com</span>
+        </span>
+      </span>
+    </p>
+
+    <p class="contact-item">
+      <i class="fas fa-briefcase warning-icon"></i>
+      <strong>Correo laboral:</strong><br>
+      <span class="tooltip-wrapper email-hidden">
+        Mostrar correo
+        <span class="tooltip-bubble bg-danger text-white">
+          🚫 Exclusivo para temas de Google
+          <span class="tooltip-email">fatimaruiz@google.com</span>
+        </span>
+      </span>
+    </p>
+
+
+    <!-- LinkedIn -->
+<div class="contact-item dropdown-toggle-wrapper">
+  <i class="fab fa-linkedin google-green"></i>
+  <strong>LinkedIn:</strong>
+  <div class="dropdown-toggle-btn" onclick="toggleDropdown('linkedinDropdown')">
+    <i class="fas fa-chevron-down"></i> Ver mi perfil
+  </div>
+  <div class="dropdown-content" id="linkedinDropdown">
+    <a href="https://mx.linkedin.com/in/fatima-ruiz/en" target="_blank" class="btn btn-outline-primary btn-sm mt-2">
+      <i class="fab fa-linkedin"></i> Ir a LinkedIn
+    </a>
+  </div>
+</div>
+
+<!-- Facebook -->
+<div class="contact-item dropdown-toggle-wrapper">
+  <i class="fab fa-facebook google-red"></i>
+  <strong>Facebook:</strong>
+  <div class="dropdown-toggle-btn" onclick="toggleDropdown('facebookDropdown')">
+    <i class="fas fa-chevron-down"></i> Ver mi perfil
+  </div>
+  <div class="dropdown-content" id="facebookDropdown">
+    <a href="https://fb.com/fatichikis" target="_blank" class="btn btn-outline-danger btn-sm mt-2">
+      <i class="fab fa-facebook"></i> Ir a Facebook
+    </a>
+  </div>
+</div>
+
     <p class="mt-4 text-muted"><i class="fas fa-lock"></i> Por motivos de seguridad, no comparto mi número de celular.</p>
 
     <div class="bonus-section">
@@ -228,6 +359,14 @@
 
       window.open(link, '_blank');
     }
+    function toggleDropdown(id) {
+  const el = document.getElementById(id);
+  if (el.style.display === "block") {
+    el.style.display = "none";
+  } else {
+    el.style.display = "block";
+  }
+}
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
