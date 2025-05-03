@@ -8,52 +8,160 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
-      background: #f4f6f8;
+      background: linear-gradient(to right, #f9f9f9, #e0f7fa);
       color: #333;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 40px 10px;
     }
-    .card {
+    .banner {
+      background: linear-gradient(135deg, #4285F4, #34A853);
+      color: white;
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      max-width: 600px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      margin-bottom: 30px;
+      animation: fadeInDown 1s ease;
     }
-    h1, h2 {
-      font-weight: bold;
+    .card-custom {
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      max-width: 700px;
+      margin: 0 auto;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      animation: fadeInUp 1s ease;
     }
-    .contact-item i {
-      width: 30px;
-      margin-right: 8px;
+    .thank-you-box {
+      background: #fce4ec;
+      border-left: 8px solid #e91e63;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 30px;
     }
+    .contact-item { margin-bottom: 15px; font-size: 1.1rem; }
+    .contact-item i { width: 30px; margin-right: 10px; }
     .google-blue { color: #4285F4; }
     .google-red { color: #EA4335; }
     .google-yellow { color: #FBBC05; }
     .google-green { color: #34A853; }
-    .highlight {
-      font-weight: bold;
-      color: #4285F4;
+    .google-purple { color: #8e24aa; }
+    .warning-icon { color: #EA4335; font-weight: bold; }
+    .email-hidden {
+      color: #888;
+      cursor: pointer;
+      text-decoration: underline;
+      position: relative;
+    }
+    .email-hidden .actual-email {
+      visibility: hidden;
+      opacity: 0;
+      position: absolute;
+      left: 0;
+      top: 25px;
+      background: #fff;
+      padding: 5px 10px;
+      border-radius: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      transition: opacity 0.3s;
+      z-index: 5;
+    }
+    .email-hidden:hover .actual-email {
+      visibility: visible;
+      opacity: 1;
+    }
+    .bonus-section {
+      background: #e8f5e9;
+      padding: 20px;
+      margin-top: 40px;
+      border-left: 6px solid #4caf50;
+      border-radius: 10px;
+      text-align: center;
+      animation: fadeIn 2s ease;
+    }
+    .bonus-section button {
+      margin-top: 15px;
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
     }
   </style>
 </head>
 <body>
-  <div class="card bg-white">
-    <h1 class="mb-3 google-blue">¡Hola!</h1>
-    <p>Si escaneaste este QR, es para ver mis datos de contacto. 🙌</p>
-    <h2 class="mt-4 google-red">Gracias por asistir a la conferencia de <span class="highlight">ciberseguridad</span> en ITT</h2>
-    <p><strong>Fecha:</strong> <span class="google-yellow">7 de mayo</span></p>
+  <div class="banner">
+    <i class="fas fa-id-badge"></i>
+    <h1 class="fw-bold">Bienvenido a mi página de contacto</h1>
+    <p>¡Gracias por visitarme! Aquí puedes encontrar cómo comunicarte conmigo. 👇</p>
+    <a href="CV_FatimaRuiz.pdf" class="btn btn-light btn-sm mt-3" download>
+      <i class="fas fa-file-download"></i> Descargar mi CV
+    </a>
+  </div>
 
-    <div class="contact-info mt-4">
-      <h2 class="mb-3 google-green"><i class="fas fa-envelope"></i> Datos de contacto</h2>
-      <p class="contact-item"><i class="fas fa-graduation-cap google-yellow"></i> Correo institucional: <a href="mailto:l14212341@tectijuana.edu.mx">l14212341@tectijuana.edu.mx</a></p>
-      <p class="contact-item"><i class="fas fa-user google-blue"></i> Correo personal (escolar): <a href="mailto:fatimadejesusruiz@gmail.com">fatimadejesusruiz@gmail.com</a></p>
-      <p class="contact-item"><i class="fab fa-linkedin google-green"></i> LinkedIn: <a href="https://mx.linkedin.com/in/fatima-ruiz/en" target="_blank">fatima-ruiz/en</a></p>
-      <p class="contact-item"><i class="fab fa-facebook google-red"></i> Facebook: <a href="https://fb.com/fatichikis" target="_blank">fb.com/fatichikis</a></p>
-      <p class="mt-4 text-muted"><i class="fas fa-lock"></i> Por motivos de seguridad, no puedo compartir mi número de celular ni correo empresarial.</p>
+  <div class="card-custom">
+    <div class="thank-you-box">
+      <h2 class="google-red fw-bold">
+        <i class="fas fa-microphone-lines"></i> Muchas gracias por asistir a mi conferencia de <span class="highlight">Ciberseguridad</span> en ITT
+      </h2>
+      <p class="mb-0"><strong>Fecha:</strong> <span class="google-purple fw-bold">7 de mayo</span></p>
+    </div>
+
+    <h3 class="google-green mb-4"><i class="fas fa-paper-plane"></i> Datos de contacto</h3>
+    <p class="contact-item"><i class="fas fa-graduation-cap google-yellow"></i> <strong>Correo institucional:</strong><br>
+      <span class="email-hidden">Mostrar correo <span class="actual-email">l14212341@tectijuana.edu.mx</span></span></p>
+    <p class="contact-item"><i class="fas fa-user google-blue"></i> <strong>Correo personal:</strong><br>
+      <span class="email-hidden">Mostrar correo <span class="actual-email">fatimadejesusruiz@gmail.com</span></span></p>
+    <p class="contact-item"><i class="fas fa-briefcase warning-icon"></i> <strong>Correo laboral:</strong><br>
+      <span class="email-hidden">Mostrar correo <span class="actual-email">fatimaruiz@google.com</span></span>
+      <span class="text-danger d-block mt-1">
+        <i class="fas fa-exclamation-triangle"></i> Solo para temas relacionados con Google
+      </span>
+    </p>
+    <p class="contact-item"><i class="fab fa-linkedin google-green"></i> <strong>LinkedIn:</strong><br>
+      <a href="https://mx.linkedin.com/in/fatima-ruiz/en" target="_blank">fatima-ruiz/en</a></p>
+    <p class="contact-item"><i class="fab fa-facebook google-red"></i> <strong>Facebook:</strong><br>
+      <a href="https://fb.com/fatichikis" target="_blank">fb.com/fatichikis</a></p>
+    <p class="mt-4 text-muted"><i class="fas fa-lock"></i> Por motivos de seguridad, no comparto mi número de celular.</p>
+
+    <div class="bonus-section">
+      <h4><i class="fas fa-gift"></i> Gracias por escanear el código QR. ¡Aquí está tu recompensa!</h4>
+      <button class="btn btn-success" onclick="goToBonus()">
+        <i class="fas fa-magic"></i> Presióname para tu sorpresa
+      </button>
     </div>
   </div>
+
+  <script>
+    function goToBonus() {
+      const links = [
+        // Cursos gratuitos (1-7)
+        "https://curso1.com", "https://curso2.com", "https://curso3.com", "https://curso4.com",
+        "https://curso5.com", "https://curso6.com", "https://curso7.com",
+        // Videotutoriales (8-15)
+        "https://www.youtube.com/watch?v=_yM7LCcQZGw", "https://www.youtube.com/watch?v=U3W32PI4Px4", "https://www.youtube.com/watch?v=8vh-27XDvFg", "https://www.youtube.com/watch?v=0NbBGfMt4qA",
+        "https://www.youtube.com/watch?v=O88VMQWcuQQ", "https://www.youtube.com/watch?v=Q-fzz2P6omQ&list=PLIivdWyY5sqKd-Cu1HZ7v5RiYE8gVsM7P", "https://www.youtube.com/watch?v=OjMnlizubTU&list=PLIivdWyY5sqK9j4_JkC8j1mY4JEGgLdcD"
+      ];
+
+      const index = Math.floor(Math.random() * links.length);
+      const link = links[index];
+
+      if (index < 7) {
+        alert("🎓 enlaces te llevarán a cursos gratuitos.\n\nAntes de redirigirte, copia el siguiente usuario y contraseña:\n\nUsuario: aprendeyavanza\nContraseña: ciber2024\n\nHaz clic en Aceptar para continuar.");
+      } else {
+        alert("📹 Disfruta del siguiente videotutorial.\n\nEspero que alimente tu conocimiento. ¡Adelante!");
+      }
+
+      window.open(link, '_blank');
+    }
+  </script>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
