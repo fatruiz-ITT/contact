@@ -586,41 +586,40 @@
     const motivoLimpio = contactOption.split(': ')[1]?.trim() || contactOption;
 
     async function uploadFileToDrive(file) {
-  const reader = new FileReader();
   return new Promise((resolve, reject) => {
+    const reader = new FileReader();
     reader.onload = async () => {
-      const base64Data = reader.result.split(',')[1];
-
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbxzwJlaZe56hooh1aYJzsj5C2Bh8sZ2qxvMQFysG3xYzTkTEGchIOuN88-TBXuw55KPSQ/exec';
-
       try {
+        // reader.result = "data:<mime-type>;base64,...."
+        const base64Data = reader.result.split(',')[1];
+
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxzwJlaZe56hooh1aYJzsj5C2Bh8sZ2qxvMQFysG3xYzTkTEGchIOuN88-TBXuw55KPSQ/exec';
+
         const response = await fetch(scriptUrl, {
           method: 'POST',
           headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
+            'Content-Type': 'application/json'
           },
-          body: new URLSearchParams({
-            file: encodeURIComponent(base64Data),
-            name: encodeURIComponent(file.name),
-            mimeType: encodeURIComponent(file.type),
-          }),
+          body: JSON.stringify({
+            file: base64Data,
+            name: file.name,
+            mimeType: file.type
+          })
         });
 
         const result = await response.json();
+
         if (result.status === 'success') {
           resolve(result.url);
         } else {
           reject(result.message || 'Error al subir archivo');
         }
-      } catch (err) {
-        reject(err);
+      } catch (error) {
+        reject(error.toString());
       }
     };
 
-    reader.onerror = () => {
-      reject('Error leyendo el archivo');
-    };
-
+    reader.onerror = () => reject('Error leyendo archivo');
     reader.readAsDataURL(file);
   });
 }
