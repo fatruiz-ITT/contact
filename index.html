@@ -586,27 +586,47 @@
     const motivoLimpio = contactOption.split(': ')[1]?.trim() || contactOption;
 
     async function uploadFileToDrive(file) {
-  const formData = new FormData();
-  formData.append('file', file);
-  formData.append('name', file.name);
-  formData.append('mimeType', file.type);
+      try {
+        // Convertir el archivo a base64
+        const fileBase64 = await new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result.split(',')[1]);
+          reader.onerror = error => reject(error);
+          reader.readAsDataURL(file);
+        });
 
-  const scriptUrl = 'https://script.google.com/macros/s/AKfycbxzwJlaZe56hooh1aYJzsj5C2Bh8sZ2qxvMQFysG3xYzTkTEGchIOuN88-TBXuw55KPSQ/exec';
+        const fileData = {
+          file: {
+            name: file.name,
+            mimeType: file.type,
+            data: fileBase64
+          }
+        };
 
-  const response = await fetch(scriptUrl, {
-    method: 'POST',
-    body: formData,
-  });
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxzwJlaZe56hooh1aYJzsj5C2Bh8sZ2qxvMQFysG3xYzTkTEGchIOuN88-TBXuw55KPSQ/exec';
 
-  const result = await response.json();
+        const response = await fetch(scriptUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(fileData),
+        });
 
-  if (result.status === 'success') {
-    return result.url;
-  } else {
-    throw new Error(result.message || 'Error al subir archivo');
-  }
-}
+        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
 
+        const result = await response.json();
+
+        if (result.status === 'success') {
+          return result.url;
+        } else {
+          throw new Error(result.message || 'Error al subir archivo');
+        }
+      } catch (error) {
+        console.error('Error en uploadFileToDrive:', error);
+        throw error;
+      }
+    }
 
 
     // Subir archivo (si hay)
