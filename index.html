@@ -203,6 +203,17 @@
     box-shadow: 0 8px 24px rgb(13 71 161 / 0.8);
     outline: none;
   }
+  .btn-whatsapp {
+  background: linear-gradient(90deg, #0d47a1, #1976d2);
+  /* ya tienes este estilo en tu css, úsalo para que no quede verde */
+}
+.btn-whatsapp:hover,
+.btn-whatsapp:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(25, 118, 210, 0.8);
+  transition: all 0.3s ease;
+}
+
   .phone-note {
     margin-top: 16px;
     font-style: italic;
@@ -365,7 +376,7 @@
     <h1 id="intro-title">Fatima Ruiz</h1>
     <ul class="intro-list" id="intro-desc">
     <li><i class="fa-solid fa-code"></i> Ingeniera en Informática con más de 6 años de experiencia</li>
-    <li><i class="fa-solid fa-laptop-code"></i> Experta en Google Cloud y seguridad de datos</li>
+    <li><i class="fa-solid fa-laptop-code"></i> Trabaja en Google Cloud y seguridad de datos</li>
     <li><i class="fa-solid fa-people-group"></i> Líder de equipos con experiencia como Program Manager</li>
     <li><i class="fa-solid fa-briefcase"></i> Proyectos en sectores Tecnológico, Bancario y de Salud</li>
     <li><i class="fa-solid fa-graduation-cap"></i> Egresada de la primera generación de Informática (ITT)</li>
@@ -435,22 +446,11 @@
   </section>
 
   <!-- WhatsApp -->
-  <section class="card card-whatsapp" tabindex="0" aria-labelledby="whatsapp-title">
-    <h2 id="whatsapp-title">
-      <i class="fa-brands fa-whatsapp"></i> Contacto Directo
+  <!-- Mensaje Directo -->
+  <section class="card card-whatsapp" tabindex="0" aria-labelledby="mensaje-directo-title">
+    <h2 id="mensaje-directo-title">
+      <i class="fa-solid fa-comments"></i> Mensaje Directo
     </h2>
-    <a
-      href="https://wa.me/526644402478?text=Hola%20Fatima,%20me%20gustaria%20contactarte%20por%20mensaje."
-      class="btn-whatsapp"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Enviar mensaje por WhatsApp a Fatima Ruiz"
-    >
-      <i class="fa-brands fa-whatsapp"></i> Enviar mensaje
-    </a>
-    <p class="phone-note" title="Solo mensajes, no disponible para llamadas">
-      <i class="fa-solid fa-message"></i> Solo mensajes, no disponible para llamadas
-    </p>
     <img
       class="profile-photo"
       src="https://avatars.githubusercontent.com/u/131306116?v=3"
@@ -458,7 +458,20 @@
       width="160"
       height="160"
     />
+    <a
+      href="https://wa.me/526644402478?text=Hola%20Fatima,%20me%20gustaria%20contactarte%20por%20mensaje."
+      class="btn-whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Enviar mensaje directo a Fatima Ruiz"
+    >
+      <i class="fa-solid fa-paper-plane"></i> Chatea conmigo
+    </a>
+    <p class="fa-solid fa-solid fa-address-book" title="Solo mensajes, no disponible para llamadas">
+      <i class="fa-solid fa-message"></i> Solo mensajes, no disponible para llamadas
+    </p>
   </section>
+
 </main>
 
 <!-- Modal Ver CV -->
