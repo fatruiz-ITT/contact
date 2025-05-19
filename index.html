@@ -165,7 +165,7 @@
 
   /* CARD WHATSAPP */
   .card-whatsapp {
-    background: #d0f0fd;
+    background: #e8f0fe;
     color: #01579b;
     justify-content: center;
     align-items: center;
@@ -506,10 +506,11 @@
       rows="5"
     ></textarea>
     <div id="messageError" class="error-msg" aria-live="assertive"></div>
-
+<!-- Esto es un comentario en HTML -->
+<!--
     <label for="userFile"><i class="fa-solid fa-file-upload"></i> Adjuntar archivo (opcional):</label>
     <input type="file" id="userFile" name="userFile" aria-describedby="fileInfo" accept=".pdf,.doc,.jpg,.png" />
-
+ -->
 
     <label for="userLink"><i class="fa-solid fa-link"></i> Adjuntar enlace (opcional):</label>
     <input
@@ -558,6 +559,7 @@
     });
   });
 
+  // Inicializar EmailJS
   emailjs.init('aNnTjgEp-VTuLpRIi'); // Tu clave pública
 
   const contactForm = document.getElementById('contactForm');
@@ -569,7 +571,6 @@
     const userEmail = document.getElementById('userEmail').value.trim();
     const userMessage = document.getElementById('userMessage').value.trim();
     const userLink = document.getElementById('userLink').value.trim();
-    const userFile = document.getElementById('userFile').files[0];
     const contactOption = document.getElementById('contactSubject').value || "Sin asunto";
 
     // Validación básica
@@ -586,81 +587,18 @@
 
     const motivoLimpio = contactOption.split(': ')[1]?.trim() || contactOption;
 
-    async function uploadFileToDrive(file) {
-      try {
-        // Convertir el archivo a base64
-        const fileBase64 = await new Promise((resolve, reject) => {
-          const reader = new FileReader();
-          reader.onload = () => resolve(reader.result.split(',')[1]);
-          reader.onerror = error => reject(error);
-          reader.readAsDataURL(file);
-        });
-
-        const fileData = {
-          file: {
-            name: file.name,
-            mimeType: file.type,
-            data: fileBase64
-          }
-        };
-
-        const scriptUrl = 'https://script.google.com/macros/s/AKfycbxzwJlaZe56hooh1aYJzsj5C2Bh8sZ2qxvMQFysG3xYzTkTEGchIOuN88-TBXuw55KPSQ/exec';
-
-        const response = await fetch(scriptUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(fileData),
-        });
-
-        if (!response.ok) throw new Error(`Error HTTP: ${response.status}`);
-
-        const result = await response.json();
-
-        if (result.status === 'success') {
-          return result.url;
-        } else {
-          throw new Error(result.message || 'Error al subir archivo');
-        }
-      } catch (error) {
-        console.error('Error en uploadFileToDrive:', error);
-        throw error;
-      }
-    }
-
-
-    // Subir archivo (si hay)
-    let uploadedFileLink = null;
-    if (userFile) {
-      formStatus.textContent = 'Subiendo archivo, por favor espera...';
-      formStatus.style.color = 'black';
-
-      try {
-        uploadedFileLink = await uploadFileToDrive(userFile);
-      } catch (error) {
-        console.error('Error al subir archivo:', error);
-        formStatus.textContent = 'Error al subir el archivo. Intenta de nuevo.';
-        formStatus.style.color = 'red';
-        return;
-      }
-    }
-
-    // Construir mensaje con enlace al archivo (si existe)
-    let fullMessage = userMessage;
-    if (uploadedFileLink) {
-      fullMessage += `\n\nArchivo adjunto subido: ${uploadedFileLink}`;
-    }
+    // Mostrar mensaje de envío
+    formStatus.textContent = 'Espere, enviando mensaje...';
+    formStatus.style.color = 'black';
 
     const templateParams = {
       user_email: userEmail,
-      message: fullMessage,
+      message: userMessage,
       link: userLink || 'No proporcionado',
       subject: contactOption,
       contact_option: contactOption,
       motivo: motivoLimpio,
       fecha: fechaActual,
-      file_name: userFile ? userFile.name : 'No se adjuntó archivo',
     };
 
     try {
