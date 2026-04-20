@@ -1,613 +1,591 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Presentación Fatima Ruiz</title>
+<title>Fatima Ruiz | Senior Software Engineer</title>
 <link
   rel="stylesheet"
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
 />
-<script type="text/javascript"src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
+  /* --- CSS VARIABLES & RESET --- */
+  :root {
+    --bg-color: #060608;
+    --card-bg: rgba(20, 30, 50, 0.4);
+    --border-color: rgba(56, 189, 248, 0.15);
+    --accent: #38bdf8; /* Tech Blue */
+    --accent-glow: rgba(56, 189, 248, 0.3);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass: blur(15px) saturate(180%);
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
   }
+
   body {
-    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-color);
+    font-family: 'Inter', sans-serif;
     margin: 0;
-    padding: 24px 12px;
-    color: #0d47a1;
+    padding: 0;
+    color: var(--text-main);
     min-height: 100vh;
     display: flex;
     justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
   }
+
+  /* --- MATRIX BACKGROUND CANVAS --- */
+  #matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Behind everything */
+    opacity: 0.3; /* Subtle effect */
+  }
+
+  /* --- MAIN CONTAINER --- */
   .cards-container {
     display: flex;
-    gap: 28px;
-    max-width: 1200px;
+    gap: 30px;
+    max-width: 1000px;
     width: 100%;
     flex-wrap: wrap;
     justify-content: center;
-  }
-  .card {
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 10px 20px rgb(25 118 210 / 0.25);
-    padding: 32px 28px;
-    flex: 1 1 320px;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  .card:hover, .card:focus-within {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 28px rgb(25 118 210 / 0.4);
+    padding: 40px 20px;
+    z-index: 1; /* Above canvas */
   }
 
-  /* CARD INTRO */
+  /* --- GLASS CARDS GENERAL --- */
+  .card {
+    background: var(--card-bg);
+    backdrop-filter: var(--glass);
+    -webkit-backdrop-filter: var(--glass);
+    border-radius: 28px;
+    border: 1px solid var(--border-color);
+    padding: 40px;
+    flex: 1 1 380px;
+    min-width: 320px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(56, 189, 248, 0.15);
+    border-color: rgba(56, 189, 248, 0.4);
+  }
+
+  /* --- CARD INTRO --- */
   .card-intro {
-    background: #e8f0fe;
-    color: #0d47a1;
     align-items: center;
     text-align: center;
   }
+
   .profile-photo {
-    width: 160px;
-    height: 160px;
-    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    border-radius: 24px; /* Modern tech look */
     margin-bottom: 24px;
-    border: 5px solid #1976d2;
-    box-shadow: 0 0 24px #1976d2aa;
+    border: 2px solid var(--accent);
+    box-shadow: 0 0 25px var(--accent-glow);
     object-fit: cover;
-    transition: transform 0.4s ease;
   }
-  .profile-photo:hover {
-    transform: scale(1.05);
-  }
+
   .card-intro h1 {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 24px;
-    letter-spacing: 0.04em;
+    margin: 0 0 24px 0;
+    color: #fff;
+    letter-spacing: -0.02em;
   }
+
   .intro-list {
     list-style: none;
-    padding-left: 0;
-    font-size: 1.1rem;
+    padding: 0;
+    font-size: 1.05rem;
     line-height: 1.6;
-    max-width: 480px;
-    margin: 0 auto;
+    text-align: left;
+    margin-bottom: 30px;
   }
+
   .intro-list li {
     margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 14px;
-    color: #1a237e;
+    color: var(--text-muted);
   }
+
   .intro-list li i {
-    color: #1976d2;
-    font-size: 1.4rem;
-    min-width: 28px;
-  }
-  .btn-cv {
-    margin-top: 30px;
-    align-self: center;
-    padding: 14px 36px;
+    color: var(--accent);
     font-size: 1.2rem;
+    min-width: 24px;
+    text-align: center;
+  }
+
+  /* --- BUTTONS --- */
+  .btn-cv {
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
     border-radius: 14px;
-    border: none;
-    background: linear-gradient(90deg, #0d47a1, #1976d2);
-    color: white;
+    border: 1px solid var(--accent);
+    background: transparent;
+    color: var(--accent);
     cursor: pointer;
     display: inline-flex;
     align-items: center;
-    gap: 14px;
-    box-shadow: 0 6px 12px rgb(25 118 210 / 0.6);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  }
-  .btn-cv:hover,
-  .btn-cv:focus {
-    background: linear-gradient(90deg, #1565c0, #0d47a1);
-    box-shadow: 0 8px 20px rgb(25 118 210 / 0.8);
-    outline: none;
+    gap: 12px;
+    transition: all 0.3s ease;
   }
 
-  /* CARD CONTACT ACADEMIC, PERSONAL, LABORAL ETC */
-  .card-contacts {
-    padding-top: 12px;
+  .btn-cv:hover {
+    background: var(--accent);
+    color: var(--bg-color);
+    box-shadow: 0 0 20px var(--accent-glow);
   }
+
+  /* --- CARD CONTACTS --- */
   .card-contacts h2 {
-    color: #0d47a1;
-    margin-bottom: 28px;
-    font-weight: 800;
+    color: #fff;
+    margin-bottom: 30px;
+    font-weight: 700;
     font-size: 2rem;
-    letter-spacing: 0.05em;
     text-align: center;
   }
+
   .contact-list {
     list-style: none;
     padding: 0;
-    margin: 0 auto;
-    max-width: 480px;
+    margin: 0;
   }
+
   .contact-item {
     display: flex;
     align-items: center;
     gap: 16px;
-    background: #e3f2fd;
-    color: #0d47a1;
-    padding: 16px 22px;
-    border-radius: 14px;
-    margin-bottom: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-main);
+    padding: 18px 24px;
+    border-radius: 16px;
+    margin-bottom: 14px;
     cursor: pointer;
-    border: 3px solid transparent;
-    transition: border-color 0.3s ease, background-color 0.3s ease;
-    font-weight: 600;
-    font-size: 1.1rem;
-    box-shadow: 0 3px 8px rgb(25 118 210 / 0.15);
-  }
-  .contact-item i {
-    font-size: 1.6rem;
-    color: #0d47a1;
-    min-width: 28px;
-    transition: color 0.3s ease;
-  }
-  .contact-item:hover,
-  .contact-item:focus {
-    border-color: #1976d2;
-    outline: none;
-    background: #d0e3fc;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    text-decoration: none; /* for links */
   }
 
-  /* CARD WHATSAPP */
-  .card-whatsapp {
-    background: #e8f0fe;
-    color: #01579b;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    gap: 20px;
+  .contact-item i {
+    font-size: 1.4rem;
+    color: var(--accent);
   }
-  .card-whatsapp h2 {
-    margin-bottom: 20px;
-    font-weight: 700;
-    font-size: 2rem;
-    letter-spacing: 0.03em;
+
+  .contact-item:hover {
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.06);
+  }
+
+  /* --- FLOATING WHATSAPP CHAT --- */
+  .floating-chat {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background-color: #25d366;
+    border-radius: 50%;
     display: flex;
+    align-items: center;
     justify-content: center;
-    align-items: center;
-    gap: 14px;
-  }
-  .btn-whatsapp {
-    background: #1976d2;
-    border: none;
     color: white;
-    padding: 16px 36px;
-    font-size: 1.2rem;
-    border-radius: 14px;
+    font-size: 32px;
+    box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
     cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 14px;
-    box-shadow: 0 6px 14px rgb(25 118 210 / 0.6);
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    z-index: 100;
+    transition: all 0.3s ease;
     text-decoration: none;
   }
-  .btn-whatsapp:hover,
-  .btn-whatsapp:focus {
-    background-color: #0d47a1;
-    box-shadow: 0 8px 24px rgb(13 71 161 / 0.8);
-    outline: none;
-  }
-  .btn-whatsapp {
-  background: linear-gradient(90deg, #0d47a1, #1976d2);
-  /* ya tienes este estilo en tu css, úsalo para que no quede verde */
-}
-.btn-whatsapp:hover,
-.btn-whatsapp:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(25, 118, 210, 0.8);
-  transition: all 0.3s ease;
-}
 
-  .phone-note {
-    margin-top: 16px;
-    font-style: italic;
-    font-size: 1rem;
-    color: #0d47a1cc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-  }
-  .phone-note i {
-    color: #25d366;
-    font-size: 1.3rem;
-  }
-  .whatsapp-img {
-    width: 180px;
-    margin-top: 10px;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgb(25 118 210 / 0.3);
-    object-fit: contain;
+  .floating-chat:hover {
+    transform: scale(1.1) translateY(-5px);
+    box-shadow: 0 8px 25px rgba(37, 211, 102, 0.7);
   }
 
-  /* MODALES */
+  /* --- MODALS (DIALOG) --- */
   dialog {
-    border-radius: 18px;
-    box-shadow: 0 0 32px rgb(0 0 0 / 0.4);
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    max-width: 90vw;
-    padding: 24px 28px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-radius: 24px;
+    border: 1px solid var(--border-color);
+    background: rgba(10, 15, 25, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+    color: var(--text-main);
+    padding: 35px;
+    width: 90%;
+    max-width: 550px;
   }
+
+  dialog::backdrop {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
   dialog#modalCV {
-    width: 480px;
-    height: 600px;
+    max-width: 800px;
   }
-  dialog#modalContact {
-    max-width: 520px;
+
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
   }
+
   dialog h3 {
-    margin-top: 0;
-    color: #0d47a1;
-    font-weight: 800;
+    margin: 0;
+    color: #fff;
     font-size: 1.8rem;
   }
-  dialog p {
-    font-size: 1.1rem;
-    color: #1565c0;
-    line-height: 1.5;
-  }
+
   .close-tooltip {
-    align-self: flex-end;
     background: transparent;
     border: none;
-    font-size: 1.8rem;
+    font-size: 2rem;
     cursor: pointer;
-    color: #0d47a1;
-    transition: color 0.3s ease;
+    color: var(--text-muted);
+    line-height: 1;
   }
-  .close-tooltip:hover,
-  .close-tooltip:focus {
-    color: #1976d2;
-    outline: none;
+
+  .close-tooltip:hover {
+    color: #fff;
   }
-  /* Formulario contacto */
+
+  /* Form */
   form {
-    margin-top: 14px;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 18px;
   }
+
   label {
     font-weight: 600;
-    color: #0d47a1;
-    font-size: 1rem;
+    color: var(--accent);
+    font-size: 0.95rem;
+    margin-bottom: -10px;
   }
-  input[type="text"],
+
   input[type="email"],
   input[type="url"],
-  textarea,
-  input[type="file"] {
-    padding: 10px 14px;
-    border-radius: 10px;
-    border: 2px solid #1976d2;
-    font-size: 1rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    resize: vertical;
-  }
   textarea {
-    min-height: 80px;
-  }
-  input[type="file"] {
-    padding: 6px 10px;
-  }
-  input[type="submit"] {
-    background: linear-gradient(90deg, #0d47a1, #1976d2);
-    border: none;
-    padding: 14px 0;
-    font-size: 1.2rem;
-    border-radius: 14px;
-    cursor: pointer;
-    color: white;
-    font-weight: 700;
-    transition: background 0.3s ease;
-  }
-  input[type="submit"]:hover,
-  input[type="submit"]:focus {
-    background: linear-gradient(90deg, #1565c0, #0d47a1);
-    outline: none;
-  }
-  /* Mensajes de validación */
-  .error-msg {
-    color: #b00020;
-    font-size: 0.9rem;
-    font-weight: 600;
-    margin-top: -10px;
-  }
-  .success-msg {
-    color: #0d7a00;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    background: rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-family: 'Inter', sans-serif;
     font-size: 1rem;
+  }
+
+  input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.2);
+  }
+
+  input[type="submit"] {
+    background: var(--accent);
+    color: var(--bg-color);
+    border: none;
+    padding: 16px;
+    font-size: 1.1rem;
     font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
     margin-top: 10px;
   }
 
-  /* Iframe preview CV */
+  input[type="submit"]:hover {
+    box-shadow: 0 0 15px var(--accent-glow);
+    transform: translateY(-2px);
+  }
+
+  /* Msgs */
+  .error-msg { color: #ef4444; font-size: 0.9rem; margin-top: -12px; }
+  .success-msg { color: #22c55e; font-size: 1rem; font-weight: 600; text-align: center; }
+
+  /* CV Iframe */
   #cvPreview {
     width: 100%;
-    height: 480px;
-    border-radius: 14px;
-    border: 2px solid #1976d2;
-    box-shadow: 0 8px 20px rgb(25 118 210 / 0.35);
+    height: 70vh;
+    border-radius: 16px;
+    border: 1px solid var(--border-color);
   }
 
   /* Responsive */
   @media (max-width: 768px) {
-    .cards-container {
-      flex-direction: column;
-      align-items: center;
-    }
-    .card {
-      max-width: 95vw;
-    }
-    .intro-list {
-      font-size: 1rem;
-    }
+    .cards-container { flex-direction: column; padding: 20px; }
+    .card { padding: 30px; }
+    .card-intro h1 { font-size: 2rem; }
+    dialog { padding: 25px; }
   }
 </style>
 </head>
 <body>
-<main class="cards-container" role="main" aria-label="Presentación de Fatima Ruiz">
 
-  <!-- Introducción -->
-  <section class="card card-intro" tabindex="0" aria-labelledby="intro-title" aria-describedby="intro-desc">
+<canvas id="matrix-bg"></canvas>
+
+<a href="https://wa.me/526644402478?text=Hello%20Fatima,%20I%20would%20like%20to%20connect." 
+   class="floating-chat" 
+   target="_blank" 
+   rel="noopener noreferrer" 
+   aria-label="Chat with me on WhatsApp">
+  <i class="fa-brands fa-whatsapp"></i>
+</a>
+
+<main class="cards-container" role="main" aria-label="Fatima Ruiz Portfolio">
+
+  <section class="card card-intro" tabindex="0">
     <img
       class="profile-photo"
       src="https://i.ibb.co/vx7Q7JMN/471992212-10228017750210493-295032562643749720-n-1.jpg"
-      alt="Foto de perfil de Fatima Ruiz"
-      width="160"
-      height="160"
+      alt="Fatima Ruiz Profile"
     />
-    <h1 id="intro-title">Fatima Ruiz</h1>
-    <ul class="intro-list" id="intro-desc">
-    <li><i class="fa-solid fa-code"></i> Ingeniera en Informática con más de 6 años de experiencia</li>
-    <li><i class="fa-solid fa-laptop-code"></i> Trabaja en Google Cloud y seguridad de datos</li>
-    <li><i class="fa-solid fa-people-group"></i> Líder de equipos con experiencia como Program Manager</li>
-    <li><i class="fa-solid fa-briefcase"></i> Proyectos en sectores Tecnológico, Bancario y de Salud</li>
-    <li><i class="fa-solid fa-graduation-cap"></i> Egresada de la primera generación de Informática (ITT)</li>
-    <li><i class="fa-solid fa-location-dot"></i> Ubicada en Tijuana, México</li>
-  </ul>
+    <h1>Fatima Ruiz</h1>
+    <ul class="intro-list">
+      <li><i class="fa-solid fa-code"></i> Software Engineer (6+ yrs exp)</li>
+      <li><i class="fa-solid fa-cloud"></i> Experienced professional: collaborated with Deloitte, Google & Citibank</li>
+      <li><i class="fa-solid fa-people-group"></i> Team Leader & Technical PMO</li>
+      <li><i class="fa-solid fa-briefcase"></i> Tech, Banking & Health Sectors</li>
+      <li><i class="fa-solid fa-graduation-cap"></i> B.Sc. in Computer Systems Engineering (ITT) | M.Sc. in Artificial Intelligence Candidate </li>
+      <li><i class="fa-solid fa-location-dot"></i> Based in Tijuana, Mexico</li>
+    </ul>
     <button
       class="btn-cv"
-      aria-haspopup="dialog"
-      aria-controls="modalCV"
       id="btnOpenCV"
       type="button"
     >
-      <i class="fa-solid fa-eye"></i> Ver CV
+      <i class="fa-solid fa-eye"></i> View Curriculum
     </button>
   </section>
 
-  <!-- Contactos -->
-  <section class="card card-contacts" tabindex="0" aria-labelledby="contacts-title">
-    <h2 id="contacts-title">Contactos</h2>
+  <section class="card card-contacts" tabindex="0">
+    <h2>Connect</h2>
     <ul class="contact-list">
       <li
         class="contact-item"
         tabindex="0"
         role="button"
-        data-contact-type="Académico"
-        aria-haspopup="dialog"
-        aria-controls="modalContact"
+        data-contact-type="Academic"
       >
-        <i class="fa-solid fa-book"></i> Contacto Académico
+        <i class="fa-solid fa-book"></i> Academic Inquiry
       </li>
       <li
         class="contact-item"
         tabindex="0"
         role="button"
         data-contact-type="Personal"
-        aria-haspopup="dialog"
-        aria-controls="modalContact"
       >
-        <i class="fa-solid fa-user"></i> Contacto Personal
+        <i class="fa-solid fa-user"></i> Personal Message
       </li>
       <li
         class="contact-item"
         tabindex="0"
         role="button"
-        data-contact-type="Laboral"
-        aria-haspopup="dialog"
-        aria-controls="modalContact"
+        data-contact-type="Professional"
       >
-        <i class="fa-solid fa-briefcase"></i> Contacto Exclusivamente Laboral
+        <i class="fa-solid fa-briefcase"></i> Professional Opportunity
       </li>
       <li>
-        <a href="https://www.linkedin.com/in/fatima-ruiz" target="_blank" rel="noopener noreferrer" class="contact-item" style="text-decoration:none;">
-          <i class="fa-brands fa-linkedin"></i> LinkedIn
+        <a href="https://www.linkedin.com/in/fatima-ruiz" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <i class="fa-brands fa-linkedin"></i> LinkedIn Profile
         </a>
       </li>
       <li>
-        <a href="https://www.facebook.com/fatichikis" target="_blank" rel="noopener noreferrer" class="contact-item" style="text-decoration:none;">
+        <a href="https://www.facebook.com/fatichikis" target="_blank" rel="noopener noreferrer" class="contact-item">
           <i class="fa-brands fa-facebook"></i> Facebook
         </a>
       </li>
       <li>
-        <a href="https://www.tiktok.com/@fatimaruiz254" target="_blank" rel="noopener noreferrer" class="contact-item" style="text-decoration:none;">
-          <i class="fa-brands fa-tiktok"></i> TikTok
+        <a href="https://www.tiktok.com/@fatimaruiz254" target="_blank" rel="noopener noreferrer" class="contact-item">
+          <i class="fa-brands fa-tiktok"></i> TikTok Tech
         </a>
       </li>
     </ul>
   </section>
 
-  <!-- WhatsApp -->
-  <!-- Mensaje Directo -->
-  <section class="card card-whatsapp" tabindex="0" aria-labelledby="mensaje-directo-title">
-    <h2 id="mensaje-directo-title">
-      <i class="fa-solid fa-comments"></i> Mensaje Directo
-    </h2>
-    <img
-      class="profile-photo"
-      src="https://avatars.githubusercontent.com/u/131306116?v=3"
-      alt="Foto de perfil de Fatima Ruiz"
-      width="160"
-      height="160"
-    />
-    <a
-      href="https://wa.me/526644402478?text=Hola%20Fatima,%20me%20gustaria%20contactarte%20por%20mensaje."
-      class="btn-whatsapp"
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label="Enviar mensaje directo a Fatima Ruiz"
-    >
-      <i class="fa-solid fa-paper-plane"></i> Chatea conmigo
-    </a>
-    <p class="fa-solid fa-solid fa-address-book" title="Solo mensajes, no disponible para llamadas">
-      <i class="fa-solid fa-message"></i> Solo mensajes, no disponible para llamadas
-    </p>
-  </section>
-
 </main>
 
-<!-- Modal Ver CV -->
-<dialog id="modalCV" aria-modal="true" aria-labelledby="modalCVTitle" aria-describedby="modalCVDesc">
-  <button class="close-tooltip" aria-label="Cerrar modal CV">&times;</button>
-  <h3 id="modalCVTitle">Currículum Vitae - Fatima Ruiz</h3>
+<dialog id="modalCV">
+  <div class="modal-header">
+    <h3>Curriculum Vitae</h3>
+    <button class="close-tooltip" aria-label="Close modal">&times;</button>
+  </div>
   <iframe
     id="cvPreview"
     src="https://drive.google.com/file/d/1iak6HhUbLnYGLjElmBlalr3xrJj0f-g8/preview"
-    title="Preview Currículum Vitae"
+    title="CV Preview"
     frameborder="0"
   ></iframe>
 </dialog>
 
-<!-- Modal Contacto -->
-<dialog id="modalContact" aria-modal="true" aria-labelledby="modalContactTitle" aria-describedby="modalContactDesc">
-  <button class="close-tooltip" aria-label="Cerrar modal contacto">&times;</button>
-  <h3 id="modalContactTitle">Contacto</h3>
-  <p id="modalContactDesc" role="alert" aria-live="polite" style="display:flex;align-items:center;gap:12px; font-size:1.1rem;">
-    <i class="fa-solid fa-shield-halved" style="color:#1976d2; font-size:1.6rem;"></i>
-    Hola, que tal. Por motivos de seguridad no muestro mi correo directamente, pero aquí puedes contactarme.
-    Una vez que reciba tu mensaje, te contactaré de nuevo.
+<dialog id="modalContact">
+  <div class="modal-header">
+    <h3 id="modalContactTitle">Contact</h3>
+    <button class="close-tooltip" aria-label="Close modal">&times;</button>
+  </div>
+  <p style="display:flex;align-items:center;gap:12px; color: var(--text-muted); margin-top: 0;">
+    <i class="fa-solid fa-shield-halved" style="color:var(--accent); font-size:1.4rem;"></i>
+    For security, my email is hidden. Please use this form. I will get back to you shortly.
   </p>
   <form id="contactForm" novalidate>
     <input type="hidden" id="contactSubject" name="subject" value="" />
-    <label for="userEmail"><i class="fa-solid fa-envelope"></i> Tu correo electrónico:</label>
-    <input
-      type="email"
-      id="userEmail"
-      name="userEmail"
-      placeholder="tucorreo@ejemplo.com"
-      required
-      aria-describedby="emailError"
-      autocomplete="email"
-    />
-    <div id="emailError" class="error-msg" aria-live="assertive"></div>
+    
+    <label for="userEmail"><i class="fa-solid fa-envelope"></i> Your Email:</label>
+    <input type="email" id="userEmail" name="userEmail" placeholder="your.email@example.com" required />
+    <div id="emailError" class="error-msg"></div>
 
-    <label for="userMessage"><i class="fa-solid fa-comment"></i> Mensaje:</label>
-    <textarea
-      id="userMessage"
-      name="userMessage"
-      placeholder="Escribe tu mensaje aquí..."
-      required
-      aria-describedby="messageError"
-      rows="5"
-    ></textarea>
-    <div id="messageError" class="error-msg" aria-live="assertive"></div>
-<!-- Esto es un comentario en HTML -->
-<!--
-    <label for="userFile"><i class="fa-solid fa-file-upload"></i> Adjuntar archivo (opcional):</label>
-    <input type="file" id="userFile" name="userFile" aria-describedby="fileInfo" accept=".pdf,.doc,.jpg,.png" />
- -->
+    <label for="userMessage"><i class="fa-solid fa-comment"></i> Message:</label>
+    <textarea id="userMessage" name="userMessage" placeholder="Write your message here..." required rows="5"></textarea>
+    <div id="messageError" class="error-msg"></div>
 
-    <label for="userLink"><i class="fa-solid fa-link"></i> Adjuntar enlace (opcional):</label>
-    <input
-      type="url"
-      id="userLink"
-      name="userLink"
-      placeholder="https://"
-      pattern="https?://.+"
-      aria-describedby="linkError"
-    />
-    <div id="linkError" class="error-msg" aria-live="assertive"></div>
-
-    <input type="submit" value="Enviar" aria-label="Enviar mensaje de contacto" />
-    <p id="formStatus" class="success-msg" role="alert" aria-live="polite"></p>
+    <label for="userLink"><i class="fa-solid fa-link"></i> Attachment Link (Optional):</label>
+    <input type="url" id="userLink" name="userLink" placeholder="https://" pattern="https?://.+" />
+    
+    <input type="submit" value="Send Message" />
+    <p id="formStatus" class="success-msg"></p>
   </form>
 </dialog>
+
 <script>
-  // Abrir modal CV
-  const btnOpenCV = document.getElementById('btnOpenCV');
-  const modalCV = document.getElementById('modalCV');
-  btnOpenCV.addEventListener('click', () => {
-    modalCV.showModal();
+  // --- MATRIX BACKGROUND EFFECT ---
+  const canvas = document.getElementById('matrix-bg');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // Characters (mix of tech and code)
+  const chars = '01<>/[]{}_-+=&*^%$#@!|';
+  const charArr = chars.split('');
+
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = [];
+
+  for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+  }
+
+  function drawMatrix() {
+    // Semi-transparent black background for trailing effect
+    ctx.fillStyle = 'rgba(6, 6, 8, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#38bdf8'; // Tech blue chars
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = charArr[Math.floor(Math.random() * charArr.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 35); // Animation speed
+
+  // Handle Resize
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   });
 
-  // Cerrar modales con el botón
+
+  // --- ORIGINAL FUNCTIONALITY (Updated for new design) ---
+  
+  // Initialize EmailJS
+  emailjs.init('aNnTjgEp-VTuLpRIi'); 
+
+  // Modals handling
+  const modalCV = document.getElementById('modalCV');
+  const modalContact = document.getElementById('modalContact');
+  const modalContactTitle = document.getElementById('modalContactTitle');
+  const contactSubjectInput = document.getElementById('contactSubject');
+  const contactForm = document.getElementById('contactForm');
+  const formStatus = document.getElementById('formStatus');
+
+  // Open CV
+  document.getElementById('btnOpenCV').addEventListener('click', () => modalCV.showModal());
+
+  // Close modals
   document.querySelectorAll('.close-tooltip').forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.target.closest('dialog').close();
       clearForm();
-      clearStatus();
     });
   });
 
-  // Abrir modal Contacto con título dinámico según opción
+  // Open Contact Modal with Dynamic Title
   const contactItems = document.querySelectorAll('.contact-item[data-contact-type]');
-  const modalContact = document.getElementById('modalContact');
-  const modalContactTitle = document.getElementById('modalContactTitle');
-  const contactSubjectInput = document.getElementById('contactSubject');
-
   contactItems.forEach((item) => {
     item.addEventListener('click', () => {
-      const contactType = item.getAttribute('data-contact-type');
-      modalContactTitle.textContent = `Contacto ${contactType}`;
-      contactSubjectInput.value = `Mensaje desde formulario: Contacto ${contactType}`;
+      const type = item.getAttribute('data-contact-type');
+      modalContactTitle.textContent = `Contact (${type})`;
+      contactSubjectInput.value = `Message from Portfolio: ${type} Inquiry`;
       modalContact.showModal();
     });
   });
 
-  // Inicializar EmailJS
-  emailjs.init('aNnTjgEp-VTuLpRIi'); // Tu clave pública
-
-  const contactForm = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
-
+  // Form Submission (EmailJS)
   contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const userEmail = document.getElementById('userEmail').value.trim();
     const userMessage = document.getElementById('userMessage').value.trim();
     const userLink = document.getElementById('userLink').value.trim();
-    const contactOption = document.getElementById('contactSubject').value || "Sin asunto";
+    const contactOption = contactSubjectInput.value || "Contact";
 
-    // Validación básica
-    if (!userEmail || !userMessage) {
-      formStatus.textContent = 'Por favor completa los campos requeridos.';
-      formStatus.style.color = 'red';
-      return;
+    // Basic Validation
+    let isValid = true;
+    if (!userEmail) {
+      document.getElementById('emailError').textContent = 'Email is required.';
+      isValid = false;
+    } else {
+      document.getElementById('emailError').textContent = '';
+    }
+    
+    if (!userMessage) {
+      document.getElementById('messageError').textContent = 'Message is required.';
+      isValid = false;
+    } else {
+      document.getElementById('messageError').textContent = '';
     }
 
-    const fechaActual = new Date().toLocaleString('es-MX', {
-      dateStyle: 'full',
-      timeStyle: 'short',
-    });
+    if (!isValid) return;
 
+    // Send logic
+    const fechaActual = new Date().toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' });
     const motivoLimpio = contactOption.split(': ')[1]?.trim() || contactOption;
 
-    // Mostrar mensaje de envío
-    formStatus.textContent = 'Espere, enviando mensaje...';
-    formStatus.style.color = 'black';
+    formStatus.textContent = 'Sending message...';
+    formStatus.style.color = 'white';
 
     const templateParams = {
       user_email: userEmail,
       message: userMessage,
-      link: userLink || 'No proporcionado',
+      link: userLink || 'Not provided',
       subject: contactOption,
       contact_option: contactOption,
       motivo: motivoLimpio,
@@ -615,27 +593,22 @@
     };
 
     try {
-      await emailjs.send('service_375bq4q', 'template_n05eahg', templateParams, 'aNnTjgEp-VTuLpRIi');
-
-      formStatus.textContent = 'Mensaje enviado correctamente. ¡Gracias!';
-      formStatus.style.color = 'green';
+      await emailjs.send('service_375bq4q', 'template_n05eahg', templateParams);
+      formStatus.textContent = 'Message sent successfully. Thank you!';
+      formStatus.style.color = '#22c55e'; // Success Green
       contactForm.reset();
     } catch (error) {
-      formStatus.textContent = 'Hubo un problema al enviar el mensaje. Intenta de nuevo.';
-      formStatus.style.color = 'red';
+      formStatus.textContent = 'Failed to send message. Please try again.';
+      formStatus.style.color = '#ef4444'; // Error Red
       console.error('EmailJS error:', error);
     }
   });
 
   function clearForm() {
     contactForm.reset();
-    emailError.textContent = '';
-    messageError.textContent = '';
-    linkError.textContent = '';
-  }
-
-  function clearStatus() {
     formStatus.textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('messageError').textContent = '';
   }
 </script>
 
