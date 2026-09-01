@@ -47,7 +47,7 @@
       transition: opacity 0.3s ease;
     }
 
-    /* FLOATING ISLAND NAVBAR */
+    /* FLOATING ISLAND NAVBAR (DESKTOP) */
     .floating-nav {
       position: fixed;
       top: 16px;
@@ -112,6 +112,13 @@
       background: rgba(56, 189, 248, 0.1);
     }
 
+    .mobile-nav-orb {
+      display: none;
+    }
+    .mobile-dropdown-menu {
+      display: none;
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -126,7 +133,6 @@
       align-items: stretch;
     }
 
-    /* SPOTLIGHT GLOW EFFECT ON GLASS PANELS */
     .glass-panel {
       background: var(--card-bg);
       backdrop-filter: var(--glass);
@@ -474,12 +480,13 @@
       box-shadow: 0 0 8px var(--accent-glow);
     }
 
-    /* Direct Connect Hub */
+    /* Direct Connect Hub & Rediseño de Inputs */
     .panel-title {
-      font-size: 1.25rem;
-      font-weight: 700;
+      font-size: 1.28rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
       color: #ffffff;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -495,23 +502,23 @@
     .social-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 22px;
     }
 
     .social-tile {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      padding: 8px 10px;
+      gap: 8px;
+      padding: 10px 12px;
       background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
       color: var(--text-main);
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       transition: all 0.25s ease;
       white-space: nowrap;
     }
@@ -524,79 +531,93 @@
     .form-wrapper {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 18px;
       flex-grow: 1;
+      margin-bottom: 12px;
     }
 
     .form-row {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 10px;
+      gap: 14px;
     }
 
     .field-group {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 7px;
     }
 
     .field-group label {
-      font-size: 0.72rem;
-      font-weight: 600;
+      font-size: 0.76rem;
+      font-weight: 700;
       color: var(--accent);
+      letter-spacing: 0.7px;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      font-family: var(--code-font);
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .input-box, select.input-box {
-      padding: 11px 12px;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
-      background: rgba(0, 0, 0, 0.35);
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(2, 6, 23, 0.6);
       color: #ffffff;
       font-family: inherit;
-      font-size: 0.85rem;
-      transition: all 0.25s;
+      font-size: 0.88rem;
+      transition: all 0.25s ease;
       width: 100%;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+    }
+
+    .input-box::placeholder, textarea.input-box::placeholder {
+      color: #64748b;
+      font-size: 0.84rem;
     }
 
     .input-box:focus, select.input-box:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 12px var(--accent-glow);
+      background: rgba(15, 23, 42, 0.85);
+      box-shadow: 0 0 16px var(--accent-glow), inset 0 1px 2px rgba(0,0,0,0.5);
     }
 
     textarea.input-box {
       resize: vertical;
-      min-height: 85px;
+      min-height: 95px;
+      line-height: 1.5;
     }
 
     .btn-submit {
       background: var(--accent-grad);
       color: #030712;
       border: none;
-      padding: 13px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      border-radius: 10px;
+      padding: 14px;
+      font-size: 0.92rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 9px;
       width: 100%;
-      margin-top: 4px;
+      margin-top: 6px;
     }
 
     .btn-submit:hover {
-      box-shadow: 0 0 20px var(--accent-glow);
+      box-shadow: 0 0 25px var(--accent-glow);
       transform: translateY(-2px);
     }
 
     .form-footer-meta {
-      margin-top: 14px;
-      padding: 8px 12px;
+      margin-top: 18px;
+      padding: 10px 14px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.02);
       border: 1px dashed rgba(56, 189, 248, 0.2);
@@ -620,11 +641,11 @@
 
     /* INTERACTIVE ROBOT COMPANION */
     .bot-companion-wrapper {
-      margin-top: 14px;
-      padding: 10px 14px;
+      margin-top: 18px;
+      padding: 12px 16px;
       border-radius: 14px;
-      background: rgba(2, 6, 23, 0.7);
-      border: 1px solid rgba(56, 189, 248, 0.2);
+      background: rgba(2, 6, 23, 0.75);
+      border: 1px solid rgba(56, 189, 248, 0.22);
       display: flex;
       align-items: center;
       gap: 14px;
@@ -767,13 +788,13 @@
       border: 1px solid rgba(56, 189, 248, 0.25);
       color: var(--accent);
       border-radius: 8px;
-      padding: 4px 8px;
-      font-size: 0.7rem;
+      padding: 5px 10px;
+      font-size: 0.72rem;
       font-weight: 700;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       transition: all 0.25s ease;
       white-space: nowrap;
     }
@@ -794,7 +815,7 @@
     }
 
     .form-alert {
-      margin-top: 12px;
+      margin-top: 14px;
       display: none;
       animation: popIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -1126,9 +1147,114 @@
       box-shadow: 0 10px 25px rgba(34, 197, 94, 0.6);
     }
 
-    @media (max-width: 600px) {
-      .floating-nav { width: 92%; justify-content: space-between; padding: 5px 10px; }
-      .nav-link { padding: 5px 8px; font-size: 0.72rem; }
+    /* RESPONSIVE MOBILE (< 768px) */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 15px;
+      }
+
+      .floating-nav {
+        display: none !important;
+      }
+
+      .mobile-nav-orb {
+        display: flex;
+        position: fixed;
+        top: 18px;
+        right: 18px;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        background: rgba(15, 23, 42, 0.9);
+        border: 2px solid var(--accent);
+        box-shadow: 0 0 20px var(--accent-glow), 0 4px 15px rgba(0, 0, 0, 0.6);
+        color: var(--accent);
+        align-items: center;
+        justify-content: center;
+        font-size: 19px;
+        z-index: 1000;
+        cursor: pointer;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .mobile-nav-orb:active {
+        transform: scale(0.92);
+      }
+
+      .mobile-nav-orb.active-orb {
+        background: var(--accent);
+        color: #030712;
+        box-shadow: 0 0 25px rgba(56, 189, 248, 0.8);
+      }
+
+      .mobile-dropdown-menu {
+        display: flex;
+        position: fixed;
+        top: 74px;
+        right: 18px;
+        background: rgba(10, 16, 32, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(56, 189, 248, 0.3);
+        border-radius: 18px;
+        padding: 10px;
+        flex-direction: column;
+        gap: 6px;
+        z-index: 999;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(56, 189, 248, 0.15);
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+        pointer-events: none;
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        min-width: 170px;
+      }
+
+      .mobile-dropdown-menu.show-menu {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+      }
+
+      .mobile-drop-link {
+        color: #f8fafc;
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 600;
+        padding: 10px 14px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.2s ease;
+      }
+
+      .mobile-drop-link i {
+        color: var(--accent);
+        font-size: 0.95rem;
+        width: 18px;
+        text-align: center;
+      }
+
+      .mobile-drop-link:active, .mobile-drop-link:hover {
+        background: rgba(56, 189, 248, 0.15);
+        color: var(--accent);
+      }
+
+      .mobile-drop-toggle-fx {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 8px;
+        margin-top: 4px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-left: 14px;
+        padding-right: 14px;
+        font-size: 0.76rem;
+        color: var(--text-muted);
+        cursor: pointer;
+      }
     }
   </style>
 </head>
@@ -1136,7 +1262,7 @@
 
 <canvas id="matrix-bg"></canvas>
 
-<!-- FLOATING DOCK NAVBAR -->
+<!-- FLOATING DOCK NAVBAR (DESKTOP) -->
 <nav class="floating-nav" aria-label="Quick navigation">
   <div class="nav-links">
     <a href="#profile" class="nav-link">Profile</a>
@@ -1149,6 +1275,23 @@
     <i class="fa-solid fa-wand-magic-sparkles"></i> <span style="font-size: 0.7rem;">FX</span>
   </button>
 </nav>
+
+<!-- BOLITA FLOTANTE DE NAVEGACIÓN TIPO WHATSAPP ARRIBA (MÓVIL) -->
+<div class="mobile-nav-orb" id="mobileNavOrb" aria-label="Toggle navigation menu" title="Navigation">
+  <i class="fa-solid fa-compass" id="mobileNavIcon"></i>
+</div>
+
+<!-- MENÚ POPUP DE LA BOLITA -->
+<div class="mobile-dropdown-menu" id="mobileDropdownMenu">
+  <a href="#profile" class="mobile-drop-link"><i class="fa-solid fa-user"></i> <span>Profile</span></a>
+  <a href="#experience" class="mobile-drop-link"><i class="fa-solid fa-briefcase"></i> <span>Experience</span></a>
+  <a href="#connect" class="mobile-drop-link"><i class="fa-solid fa-paper-plane"></i> <span>Connect</span></a>
+  <a href="#systems" class="mobile-drop-link"><i class="fa-solid fa-display"></i> <span>Systems</span></a>
+  <div class="mobile-drop-toggle-fx" id="btnToggleMatrixMobile">
+    <span>Matrix Background</span>
+    <i class="fa-solid fa-wand-magic-sparkles" style="color:var(--accent);"></i>
+  </div>
+</div>
 
 <a href="https://wa.me/526644402478?text=Hello%20Fatima,%20I%20would%20like%20to%20connect%20regarding%20a%20project." 
    class="floating-wa" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Direct">
@@ -1316,14 +1459,14 @@
         <div id="tab-education" class="tab-content">
           <div class="timeline-item">
             <div class="timeline-title">Google Cloud Engineering Certificate (In Progress)</div>
-            <div class="timeline-sub">Google Cloud Platform | Est. Completion: Dec. 2026</div>
+            <div class="timeline-sub">Google Cloud Platform | Est. Completion: 2026</div>
             <p class="timeline-desc">
               Specialization covering production-grade cloud architecture, deployment automation, secure IAM provisioning, and Kubernetes workload management.
             </p>
           </div>
           <div class="timeline-item">
             <div class="timeline-title">M.Sc. in Artificial Intelligence (In Progress)</div>
-            <div class="timeline-sub">TecNM / ITT | 2026 - Present (Est. Completion: Dec. 2027) </div>
+            <div class="timeline-sub">TecNM / ITT | 2026 - Present</div>
             <p class="timeline-desc">
               Advanced research on autonomous rational agent architectures, computer vision systems, and ethical governance frameworks.
             </p>
@@ -1364,7 +1507,7 @@
       </div>
     </section>
 
-    <!-- RIGHT: DIRECT CONNECT HUB (BALANCEADO CON COMPAÑERO ROBOT) -->
+    <!-- RIGHT: DIRECT CONNECT HUB (CON INPUTS MEJORADOS Y ESPACIADOS) -->
     <section class="glass-panel" id="connect">
       <div class="form-container-balanced">
         <div>
@@ -1388,17 +1531,17 @@
           <form class="form-wrapper" id="hubForm" novalidate>
             <div class="form-row">
               <div class="field-group">
-                <label for="userName">Your Name</label>
+                <label for="userName"><i class="fa-solid fa-user-tag"></i> Your Name</label>
                 <input type="text" id="userName" name="userName" class="input-box form-track-input" placeholder="e.g. Alex Mercer" required />
               </div>
               <div class="field-group">
-                <label for="userEmail">Your Email</label>
+                <label for="userEmail"><i class="fa-solid fa-envelope"></i> Your Email</label>
                 <input type="email" id="userEmail" name="userEmail" class="input-box form-track-input" placeholder="name@company.com" required />
               </div>
             </div>
 
             <div class="field-group">
-              <label for="inquiryType">Reason for Inquiry</label>
+              <label for="inquiryType"><i class="fa-solid fa-sliders"></i> Reason for Inquiry</label>
               <select id="inquiryType" name="inquiryType" class="input-box form-track-input">
                 <option value="Professional Consulting / SRE Opportunity">Professional / SRE Consulting</option>
                 <option value="Academic & AI Research Collaboration">Academic & AI Research Collaboration</option>
@@ -1408,12 +1551,12 @@
             </div>
 
             <div class="field-group">
-              <label for="userMessage">Message</label>
+              <label for="userMessage"><i class="fa-solid fa-message"></i> Message</label>
               <textarea id="userMessage" name="userMessage" class="input-box form-track-input" placeholder="Write your message or project scope here..." required></textarea>
             </div>
 
             <div class="field-group">
-              <label for="userLink">Reference Link (Optional)</label>
+              <label for="userLink"><i class="fa-solid fa-link"></i> Reference Link (Optional)</label>
               <input type="url" id="userLink" name="userLink" class="input-box form-track-input" placeholder="https://" />
             </div>
 
@@ -1424,7 +1567,7 @@
           </form>
         </div>
 
-        <!-- ROBOT INTERACTIVO (SIGUE EL CURSOR, BAILA Y SE OCULTA AL ESCRIBIR) -->
+        <!-- ROBOT INTERACTIVO -->
         <div class="bot-companion-wrapper" id="botCompanion">
           <div class="bot-avatar" id="botAvatar">
             <div class="bot-antenna"></div>
@@ -1579,13 +1722,13 @@
 
 </div>
 
-<!-- MODAL CV PREVIEW -->
+<!-- MODAL CV PREVIEW (URL ACTUALIZADA) -->
 <dialog id="modalCV">
   <div class="modal-head">
     <h3 style="font-size:1.1rem; color:#fff;">Curriculum Vitae — Fatima Ruiz</h3>
     <button class="close-btn" onclick="document.getElementById('modalCV').close()">&times;</button>
   </div>
-  <iframe id="cvFrame" src="https://drive.google.com/file/d/1mdAGDVdbQJWVyQdLiwg7pUaTL0D_Nbjb/preview " title="CV Viewer"></iframe>
+  <iframe id="cvFrame" src="https://drive.google.com/file/d/1mdAGDVdbQJWVyQdLiwg7pUaTL0D_Nbjb/preview" title="CV Viewer"></iframe>
 </dialog>
 
 <script>
@@ -1617,17 +1760,55 @@
   let matrixInterval = setInterval(drawMatrix, 35);
 
   let matrixActive = true;
-  document.getElementById('btnToggleMatrix').addEventListener('click', () => {
+  function toggleMatrixState() {
     matrixActive = !matrixActive;
     canvas.style.opacity = matrixActive ? '0.22' : '0';
-  });
+  }
+
+  document.getElementById('btnToggleMatrix').addEventListener('click', toggleMatrixState);
+  document.getElementById('btnToggleMatrixMobile').addEventListener('click', toggleMatrixState);
 
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
 
-  // 2. SPOTLIGHT GLOW EFFECT ON CARDS
+  // 2. MOBILE ORB MENU CONTROLLER
+  const mobileNavOrb = document.getElementById('mobileNavOrb');
+  const mobileDropdownMenu = document.getElementById('mobileDropdownMenu');
+  const mobileNavIcon = document.getElementById('mobileNavIcon');
+
+  mobileNavOrb.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isOpen = mobileDropdownMenu.classList.contains('show-menu');
+    if (isOpen) {
+      mobileDropdownMenu.classList.remove('show-menu');
+      mobileNavOrb.classList.remove('active-orb');
+      mobileNavIcon.className = 'fa-solid fa-compass';
+    } else {
+      mobileDropdownMenu.classList.add('show-menu');
+      mobileNavOrb.classList.add('active-orb');
+      mobileNavIcon.className = 'fa-solid fa-xmark';
+    }
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!mobileDropdownMenu.contains(e.target) && !mobileNavOrb.contains(e.target)) {
+      mobileDropdownMenu.classList.remove('show-menu');
+      mobileNavOrb.classList.remove('active-orb');
+      mobileNavIcon.className = 'fa-solid fa-compass';
+    }
+  });
+
+  document.querySelectorAll('.mobile-drop-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileDropdownMenu.classList.remove('show-menu');
+      mobileNavOrb.classList.remove('active-orb');
+      mobileNavIcon.className = 'fa-solid fa-compass';
+    });
+  });
+
+  // 3. SPOTLIGHT GLOW EFFECT ON CARDS
   document.querySelectorAll('.glass-panel').forEach((panel) => {
     panel.addEventListener('mousemove', (e) => {
       const rect = panel.getBoundingClientRect();
@@ -1638,7 +1819,7 @@
     });
   });
 
-  // 3. TIJUANA LIVE CLOCK
+  // 4. TIJUANA LIVE CLOCK
   function updateTijuanaClock() {
     const clockEl = document.getElementById('liveClock');
     if (!clockEl) return;
@@ -1655,7 +1836,7 @@
   setInterval(updateTijuanaClock, 1000);
   updateTijuanaClock();
 
-  // 4. ROBOT COMPANION LOGIC
+  // 5. ROBOT COMPANION LOGIC
   const botCompanion = document.getElementById('botCompanion');
   const botAvatar = document.getElementById('botAvatar');
   const botSpeech = document.getElementById('botSpeech');
@@ -1704,7 +1885,7 @@
     }, 4500);
   });
 
-  // 5. TABS & CAROUSEL
+  // 6. TABS & CAROUSEL
   function openTab(evt, tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1720,7 +1901,7 @@
     document.getElementById('modalCV').showModal();
   });
 
-  // 6. GOOGLE APPS SCRIPT FORM TRANSMISSION
+  // 7. GOOGLE APPS SCRIPT FORM TRANSMISSION
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5RLOCZfa_Y0JOQ1xG_ovViKKIGj8CZD-9IhX_KrUMuwV3YqrMIglMPaO94OcaJvGa/exec';
 
   const hubForm = document.getElementById('hubForm');
