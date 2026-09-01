@@ -24,6 +24,10 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background-color: var(--bg);
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -31,6 +35,7 @@
       min-height: 100vh;
       line-height: 1.6;
       overflow-x: hidden;
+      padding-top: 65px;
     }
 
     #matrix-bg {
@@ -39,15 +44,80 @@
       width: 100%; height: 100%;
       z-index: -1;
       opacity: 0.22;
+      transition: opacity 0.3s ease;
+    }
+
+    /* FLOATING ISLAND NAVBAR */
+    .floating-nav {
+      position: fixed;
+      top: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      border-radius: 40px;
+      padding: 6px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(56, 189, 248, 0.15);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.76rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: all 0.25s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: #fff;
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .nav-divider {
+      width: 1px;
+      height: 16px;
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .nav-toggle-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.25s;
+    }
+
+    .nav-toggle-btn:hover {
+      color: var(--accent);
+      background: rgba(56, 189, 248, 0.1);
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 30px 16px 80px 16px;
+      padding: 15px 16px 80px 16px;
     }
 
-    /* GRID PRINCIPAL RESPONSIVO */
     .grid-2col {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -56,6 +126,7 @@
       align-items: stretch;
     }
 
+    /* SPOTLIGHT GLOW EFFECT ON GLASS PANELS */
     .glass-panel {
       background: var(--card-bg);
       backdrop-filter: var(--glass);
@@ -63,22 +134,38 @@
       border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 28px;
-      transition: all 0.35s ease;
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      position: relative;
+      overflow: hidden;
     }
 
-    .glass-panel:hover {
-      border-color: var(--card-hover-border);
-      box-shadow: 0 16px 40px rgba(56, 189, 248, 0.1);
+    .glass-panel::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border-radius: 24px;
+      padding: 1.5px;
+      background: radial-gradient(400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.55), transparent 40%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .glass-panel:hover::before {
+      opacity: 1;
     }
 
     .profile-row {
       display: flex;
       align-items: center;
       gap: 18px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
       flex-wrap: wrap;
     }
 
@@ -135,6 +222,35 @@
       font-weight: 600;
     }
 
+    .location-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      padding: 4px 12px;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      border-radius: 20px;
+      font-size: 0.72rem;
+      font-family: var(--code-font);
+      color: var(--text-muted);
+    }
+
+    .location-live-badge i {
+      color: var(--accent);
+    }
+
+    .live-clock {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .profile-actions {
+      display: flex;
+      margin-top: 18px;
+      width: 100%;
+    }
+
     .btn-main {
       padding: 12px 20px;
       font-size: 0.88rem;
@@ -150,7 +266,6 @@
       gap: 10px;
       transition: all 0.3s ease;
       text-decoration: none;
-      margin-top: 18px;
       width: 100%;
     }
 
@@ -161,7 +276,6 @@
       box-shadow: 0 0 25px var(--accent-glow);
     }
 
-    /* Tabs */
     .tabs-nav {
       display: flex;
       gap: 6px;
@@ -231,7 +345,6 @@
     .timeline-sub { font-size: 0.75rem; color: var(--accent); margin-bottom: 4px; font-family: var(--code-font); }
     .timeline-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.45; }
 
-    /* RETRÁCTIL / ACCORDION FLAGSHIP */
     details.agent-accordion {
       margin-top: 8px;
       border-radius: 10px;
@@ -361,7 +474,7 @@
       box-shadow: 0 0 8px var(--accent-glow);
     }
 
-    /* Direct Connect Hub & Form Recíproco */
+    /* Direct Connect Hub */
     .panel-title {
       font-size: 1.25rem;
       font-weight: 700;
@@ -481,10 +594,9 @@
       transform: translateY(-2px);
     }
 
-    /* Footer de balance recíproco */
     .form-footer-meta {
-      margin-top: 18px;
-      padding: 10px 14px;
+      margin-top: 14px;
+      padding: 8px 12px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.02);
       border: 1px dashed rgba(56, 189, 248, 0.2);
@@ -506,7 +618,181 @@
       color: var(--accent);
     }
 
-    /* Terminal Status Card */
+    /* INTERACTIVE ROBOT COMPANION */
+    .bot-companion-wrapper {
+      margin-top: 14px;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(2, 6, 23, 0.7);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s ease;
+    }
+
+    .bot-companion-wrapper.typing-hide {
+      opacity: 0.15;
+      transform: scale(0.96) translateY(4px);
+      pointer-events: none;
+      filter: blur(1px);
+    }
+
+    .bot-avatar {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      flex-shrink: 0;
+      animation: botFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes botFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .bot-antenna {
+      position: absolute;
+      top: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 2px;
+    }
+
+    .bot-antenna::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 8px #38bdf8;
+      animation: antennaGlow 1.5s infinite alternate;
+    }
+
+    @keyframes antennaGlow {
+      from { background: #38bdf8; box-shadow: 0 0 4px #38bdf8; }
+      to { background: #4ade80; box-shadow: 0 0 10px #4ade80; }
+    }
+
+    .bot-head {
+      width: 44px;
+      height: 38px;
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      border: 2px solid var(--accent);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 0 8px rgba(56, 189, 248, 0.2);
+    }
+
+    .bot-eye {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0284c7;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 4px rgba(56, 189, 248, 0.5);
+    }
+
+    .bot-pupil {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #38bdf8;
+      box-shadow: 0 0 6px #38bdf8;
+      transition: transform 0.08s ease-out;
+    }
+
+    .bot-mouth {
+      position: absolute;
+      bottom: 5px;
+      width: 14px;
+      height: 2px;
+      background: rgba(56, 189, 248, 0.4);
+      border-radius: 2px;
+    }
+
+    .bot-info {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .bot-status-title {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .bot-status-title span.pulse-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 6px #22c55e;
+      display: inline-block;
+    }
+
+    .bot-speech {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      font-family: var(--code-font);
+      line-height: 1.35;
+      transition: all 0.25s ease;
+    }
+
+    .bot-dance-btn {
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+      color: var(--accent);
+      border-radius: 8px;
+      padding: 4px 8px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .bot-dance-btn:hover {
+      background: var(--accent-grad);
+      color: #030712;
+      border-color: transparent;
+    }
+
+    .dancing {
+      animation: botDance 0.5s infinite alternate ease-in-out !important;
+    }
+
+    @keyframes botDance {
+      0% { transform: translateY(0) rotate(-6deg); }
+      100% { transform: translateY(-8px) rotate(6deg); }
+    }
+
     .form-alert {
       margin-top: 12px;
       display: none;
@@ -579,7 +865,6 @@
       margin-top: 6px;
     }
 
-    /* Carousel */
     .carousel-header {
       display: flex;
       justify-content: space-between;
@@ -840,11 +1125,30 @@
       transform: scale(1.1) translateY(-3px);
       box-shadow: 0 10px 25px rgba(34, 197, 94, 0.6);
     }
+
+    @media (max-width: 600px) {
+      .floating-nav { width: 92%; justify-content: space-between; padding: 5px 10px; }
+      .nav-link { padding: 5px 8px; font-size: 0.72rem; }
+    }
   </style>
 </head>
 <body>
 
 <canvas id="matrix-bg"></canvas>
+
+<!-- FLOATING DOCK NAVBAR -->
+<nav class="floating-nav" aria-label="Quick navigation">
+  <div class="nav-links">
+    <a href="#profile" class="nav-link">Profile</a>
+    <a href="#experience" class="nav-link">Experience</a>
+    <a href="#connect" class="nav-link">Connect</a>
+    <a href="#systems" class="nav-link">Systems</a>
+  </div>
+  <div class="nav-divider"></div>
+  <button class="nav-toggle-btn" id="btnToggleMatrix" title="Toggle Matrix FX">
+    <i class="fa-solid fa-wand-magic-sparkles"></i> <span style="font-size: 0.7rem;">FX</span>
+  </button>
+</nav>
 
 <a href="https://wa.me/526644402478?text=Hello%20Fatima,%20I%20would%20like%20to%20connect%20regarding%20a%20project." 
    class="floating-wa" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp Direct">
@@ -855,8 +1159,8 @@
   
   <div class="grid-2col">
     
-    <!-- LEFT: PROFILE & TIMELINE -->
-    <section class="glass-panel">
+    <!-- LEFT: BACKGROUND, EXPERIENCE, TECH STACK & AWARDS TABS -->
+    <section class="glass-panel" id="profile">
       <div>
         <div class="profile-row">
           <img class="profile-photo" src="https://i.ibb.co/vx7Q7JMN/471992212-10228017750210493-295032562643749720-n-1.jpg" alt="Fatima Ruiz" />
@@ -867,8 +1171,14 @@
           </div>
         </div>
 
+        <!-- TIMEZONE & LOCATION WIDGET -->
+        <div class="location-live-badge">
+          <i class="fa-solid fa-location-dot"></i>
+          <span>Tijuana, MX (PST) • <span class="live-clock" id="liveClock">--:--:--</span> • Remote Ready</span>
+        </div>
+
         <!-- Tabs Nav -->
-        <div class="tabs-nav">
+        <div class="tabs-nav" id="experience">
           <button class="tab-btn active" onclick="openTab(event, 'tab-experience')"><i class="fa-solid fa-briefcase"></i> Experience</button>
           <button class="tab-btn" onclick="openTab(event, 'tab-skills')"><i class="fa-solid fa-microchip"></i> Tech Stack</button>
           <button class="tab-btn" onclick="openTab(event, 'tab-education')"><i class="fa-solid fa-graduation-cap"></i> Academics</button>
@@ -881,7 +1191,7 @@
           <!-- GOOGLE LLC -->
           <div class="timeline-item">
             <div class="timeline-title">Google LLC — Technical Program Management & SRE Systems Automation</div>
-            <div class="timeline-sub">June 2024 - Present (2 yrs, 2 months)</div>
+            <div class="timeline-sub">June 2024 - Present (2 yrs, 2 mos)</div>
             <p class="timeline-desc">
               Architect of high-impact cloud workflows, end-to-end SRE automated pipelines, and intelligent ticket classification for global engineering teams. Cut incident triage cycles from 2 hours to 15 minutes and reduced daily operational toil by 85%.
             </p>
@@ -1006,14 +1316,14 @@
         <div id="tab-education" class="tab-content">
           <div class="timeline-item">
             <div class="timeline-title">Google Cloud Engineering Certificate (In Progress)</div>
-            <div class="timeline-sub">Google Cloud Platform | Est. Completion: Dec 2026</div>
+            <div class="timeline-sub">Google Cloud Platform | Est. Completion: Dec. 2026</div>
             <p class="timeline-desc">
               Specialization covering production-grade cloud architecture, deployment automation, secure IAM provisioning, and Kubernetes workload management.
             </p>
           </div>
           <div class="timeline-item">
             <div class="timeline-title">M.Sc. in Artificial Intelligence (In Progress)</div>
-            <div class="timeline-sub">TecNM / ITT | 2026 - Present (Est. Completion: Dec 2027) </div>
+            <div class="timeline-sub">TecNM / ITT | 2026 - Present (Est. Completion: Dec. 2027) </div>
             <p class="timeline-desc">
               Advanced research on autonomous rational agent architectures, computer vision systems, and ethical governance frameworks.
             </p>
@@ -1046,13 +1356,16 @@
         </div>
       </div>
 
-      <button class="btn-main" id="btnCV" type="button">
-        <i class="fa-solid fa-file-lines"></i> View Curriculum Vitae
-      </button>
+      <!-- PROFILE FOOTER ACTIONS: VIEW CV -->
+      <div class="profile-actions">
+        <button class="btn-main" id="btnCV" type="button">
+          <i class="fa-solid fa-file-lines"></i> View Curriculum Vitae
+        </button>
+      </div>
     </section>
 
-    <!-- RIGHT: DIRECT CONNECT HUB (BALANCEADO SIMÉTRICAMENTE) -->
-    <section class="glass-panel">
+    <!-- RIGHT: DIRECT CONNECT HUB (BALANCEADO CON COMPAÑERO ROBOT) -->
+    <section class="glass-panel" id="connect">
       <div class="form-container-balanced">
         <div>
           <h2 class="panel-title"><i class="fa-solid fa-paper-plane" style="color:var(--accent);"></i> Direct Connect Hub</h2>
@@ -1076,17 +1389,17 @@
             <div class="form-row">
               <div class="field-group">
                 <label for="userName">Your Name</label>
-                <input type="text" id="userName" name="userName" class="input-box" placeholder="e.g. Alex Mercer" required />
+                <input type="text" id="userName" name="userName" class="input-box form-track-input" placeholder="e.g. Alex Mercer" required />
               </div>
               <div class="field-group">
                 <label for="userEmail">Your Email</label>
-                <input type="email" id="userEmail" name="userEmail" class="input-box" placeholder="name@company.com" required />
+                <input type="email" id="userEmail" name="userEmail" class="input-box form-track-input" placeholder="name@company.com" required />
               </div>
             </div>
 
             <div class="field-group">
               <label for="inquiryType">Reason for Inquiry</label>
-              <select id="inquiryType" name="inquiryType" class="input-box">
+              <select id="inquiryType" name="inquiryType" class="input-box form-track-input">
                 <option value="Professional Consulting / SRE Opportunity">Professional / SRE Consulting</option>
                 <option value="Academic & AI Research Collaboration">Academic & AI Research Collaboration</option>
                 <option value="Web / Automation Project Quote">Project Quote / Web Automation</option>
@@ -1096,12 +1409,12 @@
 
             <div class="field-group">
               <label for="userMessage">Message</label>
-              <textarea id="userMessage" name="userMessage" class="input-box" placeholder="Write your message or project scope here..." required></textarea>
+              <textarea id="userMessage" name="userMessage" class="input-box form-track-input" placeholder="Write your message or project scope here..." required></textarea>
             </div>
 
             <div class="field-group">
               <label for="userLink">Reference Link (Optional)</label>
-              <input type="url" id="userLink" name="userLink" class="input-box" placeholder="https://" />
+              <input type="url" id="userLink" name="userLink" class="input-box form-track-input" placeholder="https://" />
             </div>
 
             <button type="submit" class="btn-submit" id="btnSubmit">
@@ -1111,7 +1424,28 @@
           </form>
         </div>
 
-        <!-- Meta de soporte que alinea la base con el botón izquierdo -->
+        <!-- ROBOT INTERACTIVO (SIGUE EL CURSOR, BAILA Y SE OCULTA AL ESCRIBIR) -->
+        <div class="bot-companion-wrapper" id="botCompanion">
+          <div class="bot-avatar" id="botAvatar">
+            <div class="bot-antenna"></div>
+            <div class="bot-head">
+              <div class="bot-eye"><div class="bot-pupil" id="botPupilLeft"></div></div>
+              <div class="bot-eye"><div class="bot-pupil" id="botPupilRight"></div></div>
+              <div class="bot-mouth"></div>
+            </div>
+          </div>
+          <div class="bot-info">
+            <div class="bot-status-title">
+              <span class="pulse-dot"></span>
+              <span>SRE Bot Companion</span>
+            </div>
+            <div class="bot-speech" id="botSpeech">Tracking cursor... Ready for deployment.</div>
+          </div>
+          <button type="button" class="bot-dance-btn" id="btnBotDance" title="Make the robot dance!">
+            <i class="fa-solid fa-music"></i> Dance
+          </button>
+        </div>
+
         <div class="form-footer-meta">
           <span><i class="fa-solid fa-shield-halved"></i> 256-Bit Encrypted Routing</span>
           <span><i class="fa-solid fa-bolt"></i> Avg. Response &lt; 24h</span>
@@ -1122,7 +1456,7 @@
   </div>
 
   <!-- SHOWCASE CARD / SYSTEMS CAROUSEL -->
-  <section class="glass-panel" style="padding: 24px;">
+  <section class="glass-panel" id="systems" style="padding: 24px;">
     <div class="carousel-header">
       <h3 style="font-size: 1.25rem; font-weight: 800; color: #fff; display: flex; align-items: center; gap: 8px;">
         <i class="fa-solid fa-display" style="color:var(--accent);"></i> Systems & Live Implementations
@@ -1255,6 +1589,7 @@
 </dialog>
 
 <script>
+  // 1. MATRIX BACKGROUND & TOGGLE
   const canvas = document.getElementById('matrix-bg');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
@@ -1279,13 +1614,97 @@
       drops[i]++;
     }
   }
-  setInterval(drawMatrix, 35);
+  let matrixInterval = setInterval(drawMatrix, 35);
+
+  let matrixActive = true;
+  document.getElementById('btnToggleMatrix').addEventListener('click', () => {
+    matrixActive = !matrixActive;
+    canvas.style.opacity = matrixActive ? '0.22' : '0';
+  });
 
   window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
 
+  // 2. SPOTLIGHT GLOW EFFECT ON CARDS
+  document.querySelectorAll('.glass-panel').forEach((panel) => {
+    panel.addEventListener('mousemove', (e) => {
+      const rect = panel.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      panel.style.setProperty('--mouse-x', `${x}px`);
+      panel.style.setProperty('--mouse-y', `${y}px`);
+    });
+  });
+
+  // 3. TIJUANA LIVE CLOCK
+  function updateTijuanaClock() {
+    const clockEl = document.getElementById('liveClock');
+    if (!clockEl) return;
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-US', {
+      timeZone: 'America/Tijuana',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: true
+    });
+    clockEl.textContent = timeStr;
+  }
+  setInterval(updateTijuanaClock, 1000);
+  updateTijuanaClock();
+
+  // 4. ROBOT COMPANION LOGIC
+  const botCompanion = document.getElementById('botCompanion');
+  const botAvatar = document.getElementById('botAvatar');
+  const botSpeech = document.getElementById('botSpeech');
+  const pupilLeft = document.getElementById('botPupilLeft');
+  const pupilRight = document.getElementById('botPupilRight');
+  const btnBotDance = document.getElementById('btnBotDance');
+
+  window.addEventListener('mousemove', (e) => {
+    if (!botAvatar) return;
+    const rect = botAvatar.getBoundingClientRect();
+    const botCenterX = rect.left + rect.width / 2;
+    const botCenterY = rect.top + rect.height / 2;
+
+    const angle = Math.atan2(e.clientY - botCenterY, e.clientX - botCenterX);
+    const distance = Math.min(3, Math.hypot(e.clientX - botCenterX, e.clientY - botCenterY) / 40);
+
+    const moveX = Math.cos(angle) * distance;
+    const moveY = Math.sin(angle) * distance;
+
+    pupilLeft.style.transform = `translate(${moveX}px, ${moveY}px)`;
+    pupilRight.style.transform = `translate(${moveX}px, ${moveY}px)`;
+  });
+
+  document.querySelectorAll('.form-track-input').forEach((input) => {
+    input.addEventListener('focus', () => {
+      botCompanion.classList.add('typing-hide');
+    });
+    input.addEventListener('blur', () => {
+      botCompanion.classList.remove('typing-hide');
+    });
+  });
+
+  let isDancing = false;
+  btnBotDance.addEventListener('click', () => {
+    if (isDancing) return;
+    isDancing = true;
+    botAvatar.classList.add('dancing');
+    botSpeech.textContent = '♫ Boop-beep! Autonomous dance routine activated! ♫';
+    btnBotDance.innerHTML = '<i class="fa-solid fa-pause"></i> Dancing!';
+
+    setTimeout(() => {
+      botAvatar.classList.remove('dancing');
+      botSpeech.textContent = 'Tracking cursor... Ready for deployment.';
+      btnBotDance.innerHTML = '<i class="fa-solid fa-music"></i> Dance';
+      isDancing = false;
+    }, 4500);
+  });
+
+  // 5. TABS & CAROUSEL
   function openTab(evt, tabId) {
     document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
     document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -1301,6 +1720,7 @@
     document.getElementById('modalCV').showModal();
   });
 
+  // 6. GOOGLE APPS SCRIPT FORM TRANSMISSION
   const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx5RLOCZfa_Y0JOQ1xG_ovViKKIGj8CZD-9IhX_KrUMuwV3YqrMIglMPaO94OcaJvGa/exec';
 
   const hubForm = document.getElementById('hubForm');
