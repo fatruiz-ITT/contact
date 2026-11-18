@@ -253,6 +253,7 @@
 
     .profile-actions {
       display: flex;
+      gap: 12px;
       margin-top: 18px;
       width: 100%;
     }
@@ -272,7 +273,7 @@
       gap: 10px;
       transition: all 0.3s ease;
       text-decoration: none;
-      width: 100%;
+      flex: 1;
     }
 
     .btn-main:hover {
@@ -525,8 +526,10 @@
 
     .social-tile i { font-size: 0.95rem; color: var(--accent); }
     .social-tile.yt-tile i { color: #ef4444; }
+    .social-tile.fb-tile i { color: #1877f2; }
     .social-tile:hover { background: rgba(56, 189, 248, 0.08); border-color: var(--accent); transform: translateY(-2px); }
     .social-tile.yt-tile:hover { border-color: #ef4444; background: rgba(239, 68, 68, 0.08); }
+    .social-tile.fb-tile:hover { border-color: #1877f2; background: rgba(24, 119, 242, 0.1); box-shadow: 0 0 14px rgba(24, 119, 242, 0.25); }
 
     .form-wrapper {
       display: flex;
@@ -1255,39 +1258,10 @@
         color: var(--text-muted);
         cursor: pointer;
       }
-        .social-tile.fb-tile i {
-  color: #1877f2;
-}
 
-.social-tile.fb-tile:hover {
-  border-color: #1877f2;
-  background: rgba(24, 119, 242, 0.1);
-  box-shadow: 0 0 14px rgba(24, 119, 242, 0.25);
-}
-        .profile-actions {
-  display: flex;
-  gap: 12px; /* Espacio entre los dos botones */
-  margin-top: 18px;
-  width: 100%;
-}
-
-.btn-main {
-  padding: 12px 20px;
-  font-size: 0.88rem;
-  font-weight: 700;
-  border-radius: 12px;
-  border: 1px solid var(--accent);
-  background: transparent;
-  color: var(--accent);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  flex: 1; /* Hace que ambos botones ocupen el mismo ancho proporcional */
-}
+      .profile-actions {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
@@ -1532,16 +1506,15 @@
         </div>
       </div>
 
-
-<!-- PROFILE FOOTER ACTIONS: VIEW CV & DOWNLOAD RESUME -->
-<div class="profile-actions">
-  <button class="btn-main" id="btnCV" type="button">
-    <i class="fa-solid fa-file-lines"></i> View CV
-  </button>
-  <a href="https://drive.google.com/file/d/1itcSUM3N_s806NownmJ-As0DJ5Jv0jql/view?usp=drivesdk" class="btn-main" target="_blank" rel="noopener noreferrer">
-    <i class="fa-solid fa-download"></i> Download Resume
-  </a>
-</div>
+      <!-- PROFILE FOOTER ACTIONS: VIEW CV & DOWNLOAD RESUME -->
+      <div class="profile-actions">
+        <button class="btn-main" id="btnCV" type="button">
+          <i class="fa-solid fa-file-lines"></i> View CV
+        </button>
+        <a href="https://drive.google.com/uc?export=download&id=1itcSUM3N_s806NownmJ-As0DJ5Jv0jql" class="btn-main" target="_blank" rel="noopener noreferrer">
+          <i class="fa-solid fa-download"></i> Download Resume
+        </a>
+      </div>
     </section>
 
     <!-- RIGHT: DIRECT CONNECT HUB (CON INPUTS MEJORADOS Y ESPACIADOS) -->
@@ -1769,7 +1742,7 @@
     <h3 style="font-size:1.1rem; color:#fff;">Curriculum Vitae — Fatima Ruiz</h3>
     <button class="close-btn" onclick="document.getElementById('modalCV').close()">&times;</button>
   </div>
-  <iframe id="cvFrame" src="https://drive.google.com/file/d/1mdAGDVdbQJWVyQdLiwg7pUaTL0D_Nbjb/preview" title="CV Viewer"></iframe>
+  <iframe id="cvFrame" src="https://drive.google.com/file/d/1itcSUM3N_s806NownmJ-As0DJ5Jv0jql/preview" title="CV Viewer"></iframe>
 </dialog>
 
 <script>
